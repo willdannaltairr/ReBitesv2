@@ -303,7 +303,7 @@ export function HeroSection() {
                 creaseShading={0}
                 as="h1"
                 fontSize="clamp(2rem, 4.5vw, 3.5rem)"
-                fontWeight={300}
+                fontWeight={600}
                 lineHeight={1.05}
                 letterSpacing="-0.02em"
                 className="text-forest-dark"
@@ -705,34 +705,34 @@ function HeroOrganicArt() {
 function HeroFoodBackdrop() {
   const shots = [
     {
-      src: "/bunga37325396.jpg",
+      src: "/daun3668371.jpg",
       className:
-        "-left-14 -top-14 h-64 w-64 rotate-[-14deg] rounded-[2.75rem] opacity-30 blur-lg sm:-left-20 sm:h-80 sm:w-80",
+        "-left-16 -top-16 h-64 w-64 rotate-[-12deg] rounded-[100%_0_100%_0] opacity-40 blur-sm sm:h-72 sm:w-72 lg:-left-20 lg:-top-20",
     },
     {
-      src: "/bunga36865667.jpg",
+      src: "/daun797797.jpg",
       className:
-        "-left-10 bottom-24 hidden h-56 w-56 rotate-[10deg] rounded-full opacity-25 blur-xl sm:block sm:h-64 sm:w-64 lg:-left-6",
+        "-right-16 -top-16 hidden h-56 w-56 rotate-[12deg] rounded-[0_100%_0_100%] opacity-35 blur-sm sm:block sm:h-64 sm:w-64 lg:-right-20 lg:-top-20",
     },
     {
-      src: "/bunga18372229.jpg",
+      src: "/daun1420019.jpg",
       className:
-        "-right-16 top-4 h-72 w-72 rotate-[12deg] rounded-[2.75rem] opacity-30 blur-lg sm:-right-24 sm:h-96 sm:w-96",
+        "-left-12 bottom-10 h-56 w-56 rotate-[10deg] rounded-[0_100%_0_100%] opacity-40 blur-sm sm:h-64 sm:w-64 lg:-left-16 lg:h-72 lg:w-72",
     },
     {
-      src: "/bunga34190668.jpg",
+      src: "/daun1072179.jpg",
       className:
-        "bottom-6 right-24 hidden h-60 w-60 -rotate-[8deg] rounded-full opacity-25 blur-xl sm:block lg:right-40",
+        "-right-12 bottom-10 hidden h-52 w-52 -rotate-[10deg] rounded-[100%_0_100%_0] opacity-35 blur-sm sm:block sm:h-60 sm:w-60 lg:-right-16 lg:h-72 lg:w-72",
     },
     {
-      src: "/bunga27010565.jpg",
+      src: "/daun1366957.jpg",
       className:
-        "left-[11%] top-8 hidden h-36 w-36 rotate-6 rounded-full opacity-20 blur-xl sm:block",
+        "left-[4%] top-1/2 hidden h-40 w-40 -translate-y-1/2 rotate-6 rounded-[0_100%_0_100%] opacity-30 blur-sm lg:block lg:h-44 lg:w-44",
     },
     {
-      src: "/bunga38042961.jpg",
+      src: "/daun3668371.jpg",
       className:
-        "right-[13%] top-10 hidden h-40 w-40 -rotate-6 rounded-full opacity-20 blur-xl lg:block",
+        "right-[4%] top-1/2 hidden h-40 w-40 -translate-y-1/2 -rotate-6 rounded-[100%_0_100%_0] opacity-30 blur-sm lg:block lg:h-44 lg:w-44",
     },
   ];
 
@@ -830,3 +830,4 @@ function FoodPlate({ image }: { image: string }) {
     </svg>
   );
 }
+
