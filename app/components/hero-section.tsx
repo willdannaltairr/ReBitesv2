@@ -1,37 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useId, useRef } from "react";
+import { useEffect, useState, useId } from "react";
 import Link from "next/link";
+import { ArrowRight, Star, User, Menu, X, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  Star,
-  User,
-  Menu,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  MapPin,
-  Flame,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
-import OptionWheel, { type OptionWheelApi } from "@/app/components/ui/korosel";
 import FoldText from "@/app/components/FoldText";
 import { DashedDivider } from "@/app/components/ornaments";
-
-const FOODS = [
-  { name: "Geprek Sambal Bawang", image: "/makanan1.jpeg", merchant: "Warung Geprek Bu Ati", price: 12000, originalPrice: 15000 },
-  { name: "Nasi Goreng Kampung", image: "/makanan2.jpeg", merchant: "Kampung Rasa", price: 15000, originalPrice: 18000 },
-  { name: "Soto Mie Bogor", image: "/makanan3.jpeg", merchant: "Soto Mie Mang Aji", price: 18000, originalPrice: 22000 },
-  { name: "Sate Ayam Pak Tigiset", image: "/makanan4.jpeg", merchant: "Sate Pak Tigiset", price: 20000, originalPrice: 25000 },
-  { name: "Rendang Padang Karindang", image: "/makanan5.jpeg", merchant: "RM Padang Karindang", price: 25000, originalPrice: 30000 },
-  { name: "Pancong Boss Lumer", image: "/makanan6.jpeg", merchant: "Pancong Lumer Depok", price: 10000, originalPrice: 13000 },
-  { name: "Martabak Gombret", image: "/makanan7.jpg", merchant: "Martabak Gombret 45", price: 22000, originalPrice: 28000 },
-  { name: "Bakso Spesial Mas Jono", image: "/makanan8.webp", merchant: "Bakso Jono", price: 18000, originalPrice: 23000 },
-  { name: "Ketoprak Telor Sedap", image: "/makanan9.webp", merchant: "Ketoprak Sedap", price: 13000, originalPrice: 16000 },
-  { name: "Mie Ayam Balap 12", image: "/makanan10.webp", merchant: "Mie Ayam Balap 12", price: 15000, originalPrice: 18000 },
-];
 
 const NAV_LINKS = [
   { href: "/#top", label: "Beranda" },
@@ -46,22 +22,12 @@ const NAV_LINKS = [
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-caramel focus-visible:ring-offset-2 focus-visible:ring-offset-cream";
 
-const formatRupiah = (value: number): string =>
-  new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  }).format(value);
-
 export function HeroSection() {
   const [open, setOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [activeNav, setActiveNav] = useState<string>("Beranda");
   const [overDark, setOverDark] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
-  const [foodIndex, setFoodIndex] = useState(0);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const wheelApi = useRef<OptionWheelApi | null>(null);
 
   const lang = "id" as "id" | "en";
 
@@ -121,7 +87,6 @@ export function HeroSection() {
   }, [mounted]);
 
   const navIsDark = mounted && overDark;
-  const selected = FOODS[foodIndex];
 
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -141,12 +106,6 @@ export function HeroSection() {
     } else {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
-
-  const steer = (action: () => void) => {
-    setAutoRotate(false);
-    action();
-    window.setTimeout(() => setAutoRotate(true), 8000);
   };
 
   return (
@@ -315,23 +274,23 @@ export function HeroSection() {
 
       <section
         id="top"
-        className="relative flex min-h-[640px] flex-col items-center overflow-hidden bg-cream px-4 pb-16 pt-24 sm:px-6 lg:min-h-[760px] lg:px-8 lg:pt-28"
+        className="relative flex min-h-[78vh] flex-col items-center justify-center overflow-hidden bg-cream px-4 pb-20 pt-32 sm:px-6 lg:min-h-[88vh] lg:px-8 lg:pt-36"
       >
         <HeroFoodBackdrop />
 
-        <div className="relative w-full">
+        <div className="relative w-full max-w-7xl">
           <DashedDivider
-            className="mx-auto mb-7 max-w-[22rem] text-caramel"
+            className="mx-auto mb-8 max-w-[26rem] text-caramel"
             tone="soft"
           />
 
-          <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-caramel/40 bg-caramel/10 px-4 py-1.5 font-sans text-[11px] font-bold uppercase tracking-[0.22em] text-caramel-dark">
-              <MapPin className="h-3.5 w-3.5" />
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-caramel/40 bg-caramel/10 px-5 py-2 font-sans text-xs font-bold uppercase tracking-[0.22em] text-caramel-dark sm:text-sm">
+              <MapPin className="h-4 w-4" />
               {t("Khusus Wilayah Kota Depok", "Only in Depok City")}
             </span>
 
-            <div className="mt-7 w-full">
+            <div className="mt-8 w-full">
               <FoldText
                 text="Ubah cara kamu menyelamatkan makanan."
                 hinge="top"
@@ -342,44 +301,44 @@ export function HeroSection() {
                 perspective={600}
                 creaseShading={0.45}
                 as="h1"
-                fontSize="clamp(2.25rem, 5.5vw, 4.25rem)"
+                fontSize="clamp(2.5rem, 6.5vw, 5.5rem)"
                 fontWeight={600}
-                lineHeight={1.08}
+                lineHeight={1.05}
                 letterSpacing="-0.02em"
                 className="text-forest-dark"
               />
             </div>
 
-            <p className="mt-7 max-w-xl font-sans text-sm leading-[1.85] text-muted-foreground">
+            <p className="mt-8 max-w-2xl font-sans text-base leading-[1.85] text-muted-foreground sm:text-lg">
               ReBites menghubungkan kamu dengan makanan surplus berkualitas dari
               dapur UMKM Kota Depok — harga lebih hemat, kualitas tetap juara,
               dan tanpa food waste.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
               <Link
                 href="/auth/register"
                 className={cn(
-                  "group inline-flex items-center gap-2 rounded-full bg-forest-dark px-7 py-3.5 font-inter text-sm font-semibold text-white shadow-[0_16px_32px_-16px_rgba(27,77,50,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-caramel",
+                  "group inline-flex items-center gap-2 rounded-full bg-forest-dark px-9 py-4 font-inter text-base font-semibold text-white shadow-[0_16px_32px_-16px_rgba(27,77,50,0.65)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-caramel",
                   FOCUS_RING,
                 )}
               >
                 Mulai Sekarang
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
                   <div className="flex items-center gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-amber text-amber" />
+                      <Star key={i} className="h-4 w-4 fill-amber text-amber" />
                     ))}
                   </div>
-                  <span className="font-sans text-sm font-bold text-forest-dark">
+                  <span className="font-sans text-base font-bold text-forest-dark">
                     5.0
                   </span>
                 </div>
-                <p className="font-sans text-[11px] leading-tight text-muted-foreground">
+                <p className="font-sans text-xs leading-tight text-muted-foreground">
                   dari{" "}
                   <span className="font-semibold text-forest-dark">500+</span>
                   <br />
@@ -390,133 +349,6 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-6 w-full max-w-[min(96vw,1400px)]">
-          <div className="relative h-[16rem] w-full sm:h-[20rem]">
-            <OptionWheel
-              items={FOODS.map((f) => f.name)}
-              defaultSelected={0}
-              side="left"
-              orientation="horizontal"
-              spacing={1.15}
-              curve={20}
-              tilt={6}
-              blur={3}
-              fade={0.32}
-              minOpacity={0.02}
-              smoothing={180}
-              loop
-              draggable
-              autoRotate={autoRotate}
-              autoRotateInterval={4000}
-              plateSize={300}
-              onChange={(index) => setFoodIndex(index)}
-              apiRef={wheelApi}
-              renderItem={(i) => <FoodPlate image={FOODS[i].image} />}
-            />
-
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-cream to-transparent sm:w-40"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-cream to-transparent sm:w-40"
-            />
-          </div>
-
-          <div className="relative z-20 -mt-2 flex items-center justify-center gap-3">
-            <button
-              type="button"
-              aria-label="Makanan sebelumnya"
-              onClick={() => steer(() => wheelApi.current?.prev())}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-white text-forest-dark shadow-sm transition-colors hover:bg-caramel hover:text-white"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-
-            <div className="flex items-center gap-1.5">
-              {FOODS.map((food, index) => (
-                <button
-                  key={food.name}
-                  type="button"
-                  aria-label={`Pilih ${food.name}`}
-                  onClick={() => steer(() => wheelApi.current?.to(index))}
-                  className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    index === foodIndex
-                      ? "w-6 bg-forest-dark"
-                      : "w-1.5 bg-hairline hover:bg-caramel",
-                  )}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              aria-label="Makanan berikutnya"
-              onClick={() => steer(() => wheelApi.current?.next())}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-white text-forest-dark shadow-sm transition-colors hover:bg-caramel hover:text-white"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={foodIndex}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 mx-auto mt-8 w-full max-w-2xl overflow-hidden rounded-3xl border border-hairline bg-white/90 p-5 shadow-[0_28px_56px_-28px_rgba(27,77,50,0.4)] backdrop-blur-sm sm:p-6"
-          >
-            <div className="flex items-center gap-5 sm:gap-6">
-              <div className="h-24 w-24 shrink-0 sm:h-28 sm:w-28">
-                <FoodPlate image={selected.image} />
-              </div>
-
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="truncate font-display text-lg font-semibold tracking-tight text-forest-dark sm:text-xl">
-                    {selected.name}
-                  </h3>
-                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-wider text-green-700">
-                    <Flame className="h-3 w-3" />
-                    Hemat {formatRupiah(selected.originalPrice - selected.price)}
-                  </span>
-                </div>
-
-                <p className="mt-0.5 font-sans text-xs text-stone">
-                  {selected.merchant} · Kota Depok
-                </p>
-
-                <div className="mt-1.5 flex items-center gap-1">
-                  <Star className="h-3 w-3 fill-gold text-gold-600" />
-                  <span className="font-sans text-xs font-semibold text-forest-dark">
-                    4.9
-                  </span>
-                </div>
-
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <span className="font-display text-xl font-bold text-green-700">
-                    {formatRupiah(selected.price)}
-                  </span>
-                  <span className="font-sans text-sm text-stone line-through">
-                    {formatRupiah(selected.originalPrice)}
-                  </span>
-                  <Link
-                    href="/cari"
-                    className="group ml-auto inline-flex items-center gap-1.5 rounded-full border border-forest-dark/20 px-4 py-2 font-sans text-xs font-semibold text-forest-dark transition-colors hover:bg-forest-dark hover:text-white"
-                  >
-                    Lihat di Peta
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </section>
     </div>
   );

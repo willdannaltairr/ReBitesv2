@@ -14,6 +14,7 @@ import { UrgentDealsSection } from "@/app/components/UrgentDealsSection";
 import { ProductDetailModal } from "@/app/components/ProductDetailModalLazy";
 import { useProductDetail } from "@/app/detail/product/use-product-detail";
 import { HeroSection } from "@/app/components/hero-section";
+import { HeroFoodCarousel } from "@/app/components/hero-food-carousel";
 import { SubscriptionSection } from "@/app/components/subscription/subscription-section";
 import { FaqSection } from "@/app/components/faq-section";
 import {
@@ -194,6 +195,8 @@ export default function Home() {
       <div id="top">
         <HeroSection />
       </div>
+
+      <HeroFoodCarousel />
 
       {partners.length > 0 && (
         <section
