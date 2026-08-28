@@ -13,6 +13,9 @@ import { SearchFilterBar } from "@/app/components/SearchFilterBar";
 import { FoodCard } from "@/app/components/FoodCard";
 import { ProductDetailModal } from "@/app/components/ProductDetailModalLazy";
 import { useProductDetail } from "@/app/detail/product/use-product-detail";
+import { PageHeader } from "@/app/components/page-header";
+import { SectionShell } from "@/app/components/section-shell";
+import { EmptyState } from "@/app/components/empty-state";
 
 const VALID_FILTERS: FilterKey[] = [
   "terdekat",
@@ -115,21 +118,14 @@ function CariContent() {
       <Navbar />
 
       <main className="flex-1 pt-28">
-        <section className="relative overflow-hidden bg-cream-50 pb-16 pt-6 lg:pb-24">
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="flex items-center justify-center gap-2 font-sans text-xs font-bold uppercase tracking-[0.3em] text-green-700">
-                <Sparkles className="h-4 w-4" />
-                Hasil Pencarian
-              </p>
-              <h2 className="mt-3 font-sans text-3xl font-bold tracking-tight text-charcoal-900 sm:text-4xl">
-                Cari Makanan Surplus
-              </h2>
-              <p className="mx-auto mt-2 max-w-md font-inter text-sm text-charcoal-500">
-                Perbarui kata kunci atau filter untuk melihat makanan surplus
-                yang kamu cari.
-              </p>
-            </div>
+        <SectionShell tone="cream">
+          <PageHeader
+            align="center"
+            icon={<Sparkles className="h-4 w-4" />}
+            eyebrow="Hasil Pencarian"
+            title="Cari Makanan Surplus"
+            subtitle="Perbarui kata kunci atau filter untuk melihat makanan surplus yang kamu cari."
+          />
 
             <div className="mt-8">
               <SearchFilterBar
@@ -201,49 +197,43 @@ function CariContent() {
                     ))}
                   </motion.div>
                 ) : (
-                  <div className="mt-10 flex flex-col items-center justify-center rounded-2xl border border-dashed border-sage-200 bg-white px-6 py-16 text-center">
-                    <SearchX
-                      className="h-12 w-12 text-sage-400"
-                      strokeWidth={1.5}
+                  <div className="mt-10">
+                    <EmptyState
+                      icon={<SearchX className="h-6 w-6" strokeWidth={1.5} />}
+                      title="Makanan tidak ditemukan"
+                      description="Coba kata kunci lain atau reset filter untuk melihat semua makanan surplus yang tersedia."
+                      action={
+                        <button
+                          type="button"
+                          onClick={resetAll}
+                          className="rounded-full bg-green-700 px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-md shadow-green-700/25 transition-all duration-200 hover:bg-green-600 active:scale-[0.98]"
+                        >
+                          Lihat Semua Makanan
+                        </button>
+                      }
                     />
-                    <p className="mt-4 font-sans text-lg font-semibold text-charcoal-900">
-                      Makanan tidak ditemukan
-                    </p>
-                    <p className="mt-1 max-w-sm font-inter text-sm text-charcoal-500">
-                      Coba kata kunci lain atau reset filter untuk melihat semua
-                      makanan surplus yang tersedia.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={resetAll}
-                      className="mt-6 rounded-full bg-green-700 px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-md shadow-green-700/25 transition-all duration-200 hover:bg-green-600 active:scale-[0.98]"
-                    >
-                      Lihat Semua Makanan
-                    </button>
                   </div>
                 )}
               </>
             ) : (
-              <div className="mt-10 flex flex-col items-center justify-center rounded-2xl border border-dashed border-sage-200 bg-white px-6 py-16 text-center">
-                <Search className="h-12 w-12 text-sage-400" strokeWidth={1.5} />
-                <p className="mt-4 font-sans text-lg font-semibold text-charcoal-900">
-                  Mulai cari makanan
-                </p>
-                <p className="mt-1 max-w-sm font-inter text-sm text-charcoal-500">
-                  Ketik nama makanan atau UMKM untuk melihat makanan surplus
-                  yang tersedia.
-                </p>
-                <Link
-                  href={fromPage}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-green-700 px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-md shadow-green-700/25 transition-all duration-200 hover:bg-green-600 active:scale-[0.98]"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Kembali ke Beranda
-                </Link>
+              <div className="mt-10">
+                <EmptyState
+                  icon={<Search className="h-6 w-6" strokeWidth={1.5} />}
+                  title="Mulai cari makanan"
+                  description="Ketik nama makanan atau UMKM untuk melihat makanan surplus yang tersedia."
+                  action={
+                    <Link
+                      href={fromPage}
+                      className="inline-flex items-center gap-2 rounded-full bg-green-700 px-6 py-2.5 font-sans text-sm font-semibold text-white shadow-md shadow-green-700/25 transition-all duration-200 hover:bg-green-600 active:scale-[0.98]"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Kembali ke Beranda
+                    </Link>
+                  }
+                />
               </div>
             )}
-          </div>
-        </section>
+        </SectionShell>
       </main>
 
       <SiteFooter />

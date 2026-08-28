@@ -2,6 +2,7 @@
 
 import { CalendarDays } from "lucide-react";
 import type { ProductDetail, Review } from "@/app/detail/product/data";
+import { PageHeader } from "@/app/components/page-header";
 import { Avatar } from "./avatar";
 import { Stars } from "./stars";
 import { StaggerGroup, StaggerItem } from "./anim";
@@ -16,15 +17,10 @@ export function ReviewSection({
   return (
     <section id="ulasan" className="scroll-mt-28 pt-20">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="font-sans text-2xl font-bold tracking-tight text-green-700 sm:text-3xl">
-            Apa Kata Mereka
-          </h2>
-          <p className="mt-2 max-w-md font-inter text-sm leading-relaxed text-charcoal-500">
-            Ulasan asli dari orang-orang yang sudah menyelamatkan porsi hari
-            ini.
-          </p>
-        </div>
+        <PageHeader
+          title="Apa Kata Mereka"
+          subtitle="Ulasan asli dari orang-orang yang sudah menyelamatkan porsi hari ini."
+        />
 
         <div className="flex items-center gap-4 rounded-2xl border border-sage-100 bg-white px-6 py-4">
           <span className="font-display text-5xl font-semibold leading-none text-charcoal-900">

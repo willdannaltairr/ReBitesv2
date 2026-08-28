@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, SearchX } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import type { ProductDetail } from '@/app/detail/product/data';
 import { fetchProductDetail } from '@/app/detail/product/detail-data';
 import type { OrderDraft } from '@/lib/types';
+import { PageHeader } from '@/app/components/page-header';
+import { EmptyState } from '@/app/components/empty-state';
 import { CheckoutProvider } from './checkout-context';
 import { CheckoutDecor } from './checkout-decor';
 import { StepIndicator } from './step-indicator';
@@ -86,19 +88,21 @@ export function CheckoutView() {
 
   if (status === 'not-found' || !draft) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-cream-50 px-6 text-center">
-        <p className="font-sans text-lg font-bold text-charcoal-900">
-          Produk tidak ditemukan
-        </p>
-        <p className="max-w-sm text-sm leading-relaxed text-charcoal-500">
-          Menu yang akan kamu pesan sudah tidak tersedia.
-        </p>
-        <Link
-          href="/home"
-          className="mt-2 rounded-full bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
-        >
-          Kembali ke Beranda
-        </Link>
+      <main className="flex min-h-screen items-center bg-cream-50 px-6">
+        <EmptyState
+          className="mx-auto w-full max-w-md"
+          icon={<SearchX className="h-6 w-6" aria-hidden />}
+          title="Produk tidak ditemukan"
+          description="Menu yang akan kamu pesan sudah tidak tersedia."
+          action={
+            <Link
+              href="/home"
+              className="mt-2 rounded-full bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+            >
+              Kembali ke Beranda
+            </Link>
+          }
+        />
       </main>
     );
   }
@@ -127,9 +131,14 @@ export function CheckoutView() {
             <StepIndicator active={1} />
           </div>
 
-          <h1 className="mt-5 font-display text-[clamp(2rem,5vw,3.4rem)] font-light leading-[1.05] tracking-[-0.02em] text-charcoal-900">
-            Detail <span className="font-extralight italic">pesanan</span>
-          </h1>
+          <PageHeader
+            className="mt-5"
+            title={
+              <>
+                Detail <span className="font-extralight italic">pesanan</span>
+              </>
+            }
+          />
 
           <div className="mt-8 grid items-start gap-6 lg:mt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-10">
             { }

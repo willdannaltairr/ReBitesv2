@@ -104,3 +104,58 @@ export function LeafSprig({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function Sparkle({
+  className,
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.span
+      aria-hidden
+      className={cn('pointer-events-none absolute', className)}
+      animate={{
+        y: [0, -12, 0],
+        rotate: [0, 45, 0],
+        opacity: [0.25, 0.9, 0.25],
+      }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: 'easeInOut',
+        delay,
+      }}
+    >
+      ✦
+    </motion.span>
+  );
+}
+
+export function DashedDivider({
+  className,
+  tone = 'default',
+}: {
+  className?: string;
+  tone?: 'default' | 'soft';
+}) {
+  return (
+    <span
+      aria-hidden
+      className={cn('relative block h-px', className)}
+      style={{
+        background:
+          'repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 10px)',
+        opacity: tone === 'soft' ? 0.2 : 0.35,
+      }}
+    >
+      <span
+        className={cn(
+          'absolute left-1/2 top-0 h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current',
+          'opacity-50',
+        )}
+      />
+    </span>
+  );
+}

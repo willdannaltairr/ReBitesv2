@@ -123,25 +123,25 @@ function SectionCountdown({
       </div>
 
       <div className="mt-1 flex items-baseline gap-1">
-        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-[#E53935] sm:text-3xl">
+        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-sale sm:text-3xl">
           {h}
         </span>
         <span
           aria-hidden
-          className="w-[1ch] text-center font-sans text-2xl font-bold leading-none text-[#E53935] sm:text-3xl"
+          className="w-[1ch] text-center font-sans text-2xl font-bold leading-none text-sale sm:text-3xl"
         >
           :
         </span>
-        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-[#E53935] sm:text-3xl">
+        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-sale sm:text-3xl">
           {m}
         </span>
         <span
           aria-hidden
-          className="w-[1ch] text-center font-sans text-2xl font-bold leading-none text-[#E53935] sm:text-3xl"
+          className="w-[1ch] text-center font-sans text-2xl font-bold leading-none text-sale sm:text-3xl"
         >
           :
         </span>
-        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-[#E53935] sm:text-3xl">
+        <span className="min-w-[2ch] text-center font-sans text-2xl font-bold tabular-nums leading-none text-sale sm:text-3xl">
           {s}
         </span>
       </div>
@@ -250,7 +250,7 @@ function UrgentCard({
           </div>
         )}
 
-        <div className="absolute left-3 top-3 z-20 rounded-full bg-[#E53935] px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-md">
+        <div className="absolute left-3 top-3 z-20 rounded-full bg-sale px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-md">
           Hemat {item.discountPercent}%
         </div>
 
@@ -264,12 +264,12 @@ function UrgentCard({
             if (isActive) toggle(item.id);
           }}
           className={cn(
-            "absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-[#E53935]",
-            liked && isActive && "bg-white text-[#E53935]",
+            "absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-sale",
+            liked && isActive && "bg-white text-sale",
             !isActive && "opacity-60",
           )}
         >
-          <Heart className={cn("h-4 w-4", liked && isActive && "fill-[#E53935] text-[#E53935]")} />
+          <Heart className={cn("h-4 w-4", liked && isActive && "fill-sale text-sale")} />
         </button>
       </div>
 
@@ -298,12 +298,12 @@ function UrgentCard({
           ) : (
             <div className="mt-2.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-[#DC2626]">Sisa {stockCount}</span>
-                <span className="text-[#DC2626]">Buru!</span>
+                <span className="font-bold text-red-600">Sisa {stockCount}</span>
+                <span className="text-red-600">Buru!</span>
               </div>
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-cream-100">
                 <motion.div
-                  className="h-full rounded-full bg-[#E53935]"
+                  className="h-full rounded-full bg-sale"
                   initial={{ width: 0 }}
                   whileInView={{ width: `${stockPct}%` }}
                   viewport={{ once: true }}
@@ -396,7 +396,7 @@ export function FlashSaleSection({
     <section
       id="flash-sale"
       data-nav="green"
-      className="relative overflow-hidden bg-gradient-to-tr from-[#163D28] via-[#2D7050] to-[#F7F5EF]"
+      className="relative overflow-hidden bg-gradient-to-tr from-forest-800 via-green-600 to-cream"
     >
       <div className="relative border-b border-white/15 bg-forest-900/40 py-3">
         <Marquee pauseOnHover>
@@ -502,8 +502,8 @@ export function FlashSaleSection({
           <div>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E53935]" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#E53935]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sale" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-sale" />
               </span>
               <span className="font-sans text-xs font-bold uppercase tracking-[0.3em] text-white">
                 Flash Sale
@@ -570,7 +570,7 @@ export function FlashSaleSection({
                       "text-[10px] font-semibold uppercase tracking-[0.18em]",
                       isActive
                         ? "text-white/70 group-hover:text-caramel"
-                        : "text-[#C8A882]/60 group-hover:text-white",
+                        : "text-caramel/60 group-hover:text-white",
                     )}
                   >
                     {slot.name}
@@ -581,8 +581,8 @@ export function FlashSaleSection({
                     className="relative flex h-2 w-2 shrink-0"
                     title="Slot aktif sekarang"
                   >
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E53935] opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#E53935]" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sale opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-sale" />
                   </span>
                 )}
               </button>

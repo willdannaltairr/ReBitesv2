@@ -683,7 +683,7 @@ function FollowedStoresSection() {
             Toko Diikuti
           </h3>
           <p className="mt-0.5 font-inter text-xs text-stone">
-            Toko yang kamu ikuti lewat tombol "Ikuti Toko" di halaman detail
+            Toko yang kamu ikuti lewat tombol &quot;Ikuti Toko&quot; di halaman detail
             toko.
           </p>
         </div>
@@ -712,7 +712,7 @@ function FollowedStoresSection() {
               Belum ada toko yang diikuti
             </p>
             <p className="mt-1 max-w-sm text-[10px] leading-relaxed text-sage-500">
-              Tekan tombol "Ikuti Toko" pada halaman detail toko favoritmu agar
+              Tekan tombol &quot;Ikuti Toko&quot; pada halaman detail toko favoritmu agar
               tampil di sini.
             </p>
           </div>
@@ -842,7 +842,7 @@ function LikedFoodsSection() {
                       <span className="mt-1 block font-inter text-[9px] font-medium text-green-700">Rp{Number(price).toLocaleString('id-ID')}</span>
                     )}
                   </span>
-                  <Heart className="h-3 w-3 shrink-0 fill-[#E53935] text-[#E53935]" />
+                  <Heart className="h-3 w-3 shrink-0 fill-sale text-sale" />
                 </Link>
               </li>
             );
@@ -941,7 +941,7 @@ export function UserProfile() {
   const phoneLabel = addressLoading ? 'Memuat…' : selectedAddress?.phone || '—';
 
   return (
-    <div className="relative min-h-screen bg-[#F8F9FA] lg:bg-cream-50">
+    <div className="relative min-h-screen bg-cream-50 lg:bg-cream-50">
       {/* Sidebar kiri — reuse desain Seller Sidebar */}
       <ProfileSidebarNav open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -1003,7 +1003,7 @@ export function UserProfile() {
               <button
                 type="button"
                 onClick={() => setIsIkutiTokoDialogOpen(true)}
-                className="group flex flex-col items-start gap-2 rounded-2xl border border-zinc-100 bg-[#FAF8F5] p-4 text-left transition-colors hover:border-sage-200 hover:bg-white"
+                className="group flex flex-col items-start gap-2 rounded-2xl border border-zinc-100 bg-cream-50 p-4 text-left transition-colors hover:border-sage-200 hover:bg-white"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-green-700 shadow-sm ring-1 ring-zinc-100 group-hover:bg-green-700 group-hover:text-white">
                   <Store className="h-4 w-4" />
@@ -1018,9 +1018,9 @@ export function UserProfile() {
               <button
                 type="button"
                 onClick={() => setIsSukaiMakananDialogOpen(true)}
-                className="group flex flex-col items-start gap-2 rounded-2xl border border-zinc-100 bg-[#FAF8F5] p-4 text-left transition-colors hover:border-sage-200 hover:bg-white"
+                className="group flex flex-col items-start gap-2 rounded-2xl border border-zinc-100 bg-cream-50 p-4 text-left transition-colors hover:border-sage-200 hover:bg-white"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#E53935] shadow-sm ring-1 ring-zinc-100 group-hover:bg-[#E53935] group-hover:text-white">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sale shadow-sm ring-1 ring-zinc-100 group-hover:bg-sale group-hover:text-white">
                   <Heart className="h-4 w-4" />
                 </span>
                 <span className="font-inter text-sm font-semibold text-forest-deep">Sukai Makanan</span>
@@ -1046,7 +1046,7 @@ export function UserProfile() {
             <DialogContent className="bg-white p-6 sm:p-7">
               <DialogHeader>
                 <DialogTitle className="font-display text-lg font-semibold text-forest-deep">Toko Diikuti</DialogTitle>
-                <DialogDescription className="font-inter text-sm text-stone">Toko yang kamu ikuti lewat tombol "Ikuti Toko" di halaman detail toko.</DialogDescription>
+                <DialogDescription className="font-inter text-sm text-stone">Toko yang kamu ikuti lewat tombol &quot;Ikuti Toko&quot; di halaman detail toko.</DialogDescription>
               </DialogHeader>
               <FollowedStoresSection />
               <DialogFooter>
@@ -1098,7 +1098,7 @@ export function UserProfile() {
                   setEditPhone(selectedAddress?.phone || '');
                   setIsEditDialogOpen(true);
                 }}
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#FF8A00] px-4 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#EB7D00]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-gold-600"
               >
                 Edit <Edit3 className="h-3 w-3" />
               </button>

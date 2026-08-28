@@ -9,6 +9,7 @@ import type { NotificationType } from '@/lib/notification-storage';
 import { ensurePromoNotifications } from '@/lib/promo-notifications';
 import { NotificationCard } from './notification-card';
 import { cn } from '@/lib/utils';
+import { EmptyState } from '@/app/components/empty-state';
 
 type NotificationFilter = 'all' | 'order' | 'payment' | 'promo';
 
@@ -105,19 +106,15 @@ export function BuyerNotificationView() {
       { }
       <div className="space-y-2.5">
         {filtered.length === 0 ? (
-          <div className="flex flex-col items-center rounded-2xl border border-dashed border-hairline bg-cream-50 px-6 py-14 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cream-100 text-charcoal-500">
-              <Bell className="h-6 w-6" />
-            </span>
-            <h3 className="mt-4 font-display text-lg font-medium text-charcoal-900">
-              Belum ada notifikasi
-            </h3>
-            <p className="mt-1 max-w-xs text-sm text-charcoal-500">
-              {filter === 'all'
+          <EmptyState
+            icon={<Bell className="h-6 w-6" aria-hidden />}
+            title="Belum ada notifikasi"
+            description={
+              filter === 'all'
                 ? 'Notifikasi tentang pesanan dan promosi akan muncul di sini.'
-                : 'Tidak ada notifikasi untuk filter ini.'}
-            </p>
-          </div>
+                : 'Tidak ada notifikasi untuk filter ini.'
+            }
+          />
         ) : (
           filtered.map((notification) => (
             <NotificationCard

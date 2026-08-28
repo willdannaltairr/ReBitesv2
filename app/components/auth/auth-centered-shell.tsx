@@ -21,7 +21,7 @@ export default function AuthCenteredShell({
   const isSeller = variant === "seller";
 
   return (
-    <main className="relative flex h-screen h-[100dvh] h-[100svh] w-screen items-center justify-center overflow-hidden overscroll-none bg-[#060E0D] p-3 sm:p-4 lg:p-6 touch-none">
+    <main className="relative flex h-screen h-[100dvh] h-[100svh] w-screen items-center justify-center overflow-hidden overscroll-none bg-forest-900 p-3 sm:p-4 lg:p-6 touch-none">
       {/* Outer background - full bleed with overlay */}
       <div className="absolute inset-0 overflow-hidden">
         <Image
@@ -34,12 +34,12 @@ export default function AuthCenteredShell({
         {/* seller darker, buyer slightly lighter */}
         {isSeller ? (
           <>
-            <div className="absolute inset-0 bg-[#07140F]/85" />
+            <div className="absolute inset-0 bg-forest-900/85" />
             <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(10,30,24,0.55)_0%,rgba(6,20,16,0.78)_55%,rgba(3,12,10,0.94)_100%)]" />
           </>
         ) : (
           <>
-            <div className="absolute inset-0 bg-[#07140F]/68" />
+            <div className="absolute inset-0 bg-forest-900/68" />
             <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(10,30,24,0.38)_0%,rgba(6,20,16,0.62)_55%,rgba(3,12,10,0.88)_100%)]" />
           </>
         )}
@@ -50,7 +50,7 @@ export default function AuthCenteredShell({
       <div className="relative flex max-h-[calc(100dvh-24px)] max-h-[calc(100svh-24px)] w-full max-w-[1080px] flex-col overflow-hidden rounded-[20px] border border-white/10 bg-white shadow-[0_28px_80px_rgba(0,0,0,0.55),0_4px_24px_rgba(0,0,0,0.35)] sm:max-h-[calc(100dvh-32px)] lg:max-h-[calc(100dvh-48px)] lg:rounded-[24px]">
         <div className="grid max-h-full gap-0 overflow-hidden lg:grid-cols-[1.05fr_1fr]">
           {/* Left visual panel - hidden on mobile */}
-          <div className="relative hidden min-h-[560px] max-h-[calc(100dvh-64px)] flex-col justify-between overflow-hidden rounded-[16px] bg-[#0F2E24] lg:m-2 lg:flex lg:max-h-[calc(100dvh-64px)]">
+          <div className="relative hidden min-h-[560px] max-h-[calc(100dvh-64px)] flex-col justify-between overflow-hidden rounded-[16px] bg-forest-900 lg:m-2 lg:flex lg:max-h-[calc(100dvh-64px)]">
             <div className="absolute inset-0">
               <Image
                 src={imageSrc}
@@ -62,12 +62,12 @@ export default function AuthCenteredShell({
               {isSeller ? (
                 <>
                   <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(15,46,36,0.68)_0%,rgba(15,46,36,0.42)_46%,rgba(8,24,18,0.9)_100%)]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081712]/75 via-transparent to-[#0F2E24]/25" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest-900/75 via-transparent to-forest-900/25" />
                 </>
               ) : (
                 <>
                   <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(15,46,36,0.52)_0%,rgba(15,46,36,0.30)_46%,rgba(8,24,18,0.78)_100%)]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#081712]/60 via-transparent to-[#0F2E24]/15" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest-900/60 via-transparent to-forest-900/15" />
                 </>
               )}
             </div>

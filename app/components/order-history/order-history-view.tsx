@@ -11,6 +11,7 @@ import { OrderToolbar, type StatusFilter, type FulfillmentFilter } from './order
 import { OrderCard } from './order-card';
 import { OrderDetailModal } from './order-detail-modal';
 import { Toaster } from '@/app/components/ui/toaster';
+import { EmptyState as SharedEmptyState } from '@/app/components/empty-state';
 
 export function OrderHistoryView() {
   const { orders, activeOrders, completedOrders, loading } = useOrders();
@@ -161,49 +162,53 @@ function EmptyState({
 }) {
   if (variant === 'no-result') {
     return (
-      <div className="flex flex-col items-center rounded-xl border border-dashed border-zinc-200 bg-white px-6 py-10 text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 text-zinc-500">
-          <SearchX className="h-5 w-5" />
-        </span>
-        <h3 className="mt-3 font-display text-base font-medium text-zinc-900">Pesanan tidak ditemukan</h3>
-        <p className="mt-1 max-w-xs text-sm text-zinc-500">Coba cari dengan Order ID atau nama produk lain.</p>
-        <button
-          type="button"
-          onClick={onClear}
-          className="mt-4 inline-flex h-9 items-center rounded-full border border-[#7A1C1C] px-5 text-xs font-semibold text-[#7A1C1C] hover:bg-[#7A1C1C] hover:text-white"
-        >
-          Hapus Filter
-        </button>
-      </div>
+      <SharedEmptyState
+        className="border-zinc-200 bg-white"
+        icon={<SearchX className="h-5 w-5" aria-hidden />}
+        title="Pesanan tidak ditemukan"
+        description="Coba cari dengan Order ID atau nama produk lain."
+        action={
+          <button
+            type="button"
+            onClick={onClear}
+            className="inline-flex h-9 items-center rounded-full border border-[#7A1C1C] px-5 text-xs font-semibold text-[#7A1C1C] hover:bg-[#7A1C1C] hover:text-white"
+          >
+            Hapus Filter
+          </button>
+        }
+      />
     );
   }
 
   if (variant === 'tab') {
     return (
-      <div className="flex flex-col items-center rounded-xl border border-dashed border-zinc-200 bg-white px-6 py-10 text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 text-zinc-500">
-          <PackageSearch className="h-5 w-5" />
-        </span>
-        <h3 className="mt-3 font-display text-base font-medium text-zinc-900">
-          {isCompletedTab ? 'Belum ada pesanan selesai' : 'Tidak ada pesanan'}
-        </h3>
-        <p className="mt-1 max-w-xs text-sm text-zinc-500">
-          {isCompletedTab ? 'Pesanan yang sudah selesai akan muncul di sini.' : 'Semua pesananmu sudah selesai.'}
-        </p>
-      </div>
+      <SharedEmptyState
+        className="border-zinc-200 bg-white"
+        icon={<PackageSearch className="h-5 w-5" aria-hidden />}
+        title={isCompletedTab ? 'Belum ada pesanan selesai' : 'Tidak ada pesanan'}
+        description={
+          isCompletedTab
+            ? 'Pesanan yang sudah selesai akan muncul di sini.'
+            : 'Semua pesananmu sudah selesai.'
+        }
+      />
     );
   }
 
   return (
-    <div className="flex flex-col items-center rounded-xl border border-dashed border-zinc-200 bg-white px-6 py-10 text-center">
-      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-cream-100 text-green-700">
-        <PackageSearch className="h-5 w-5" />
-      </span>
-      <h3 className="mt-3 font-display text-base font-medium text-zinc-900">Belum Ada Pesanan</h3>
-      <p className="mt-1 max-w-xs text-sm text-zinc-500">Pesanan yang kamu lakukan akan muncul di sini.</p>
-      <Link href="/home" className="mt-4 inline-flex h-9 items-center rounded-full bg-[#225138] px-5 text-xs font-semibold text-white hover:bg-[#143B2D]">
-        Mulai Belanja
-      </Link>
-    </div>
+    <SharedEmptyState
+      className="border-zinc-200 bg-white"
+      icon={<PackageSearch className="h-5 w-5" aria-hidden />}
+      title="Belum Ada Pesanan"
+      description="Pesanan yang kamu lakukan akan muncul di sini."
+      action={
+        <Link
+          href="/home"
+          className="inline-flex h-9 items-center rounded-full bg-green-700 px-5 text-xs font-semibold text-white hover:bg-forest-dark"
+        >
+          Mulai Belanja
+        </Link>
+      }
+    />
   );
 }

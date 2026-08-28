@@ -135,7 +135,7 @@ export function ProductDetailModal({
           { }
           <div className="relative flex flex-col lg:w-[45%]">
             { }
-            <div className="relative aspect-square flex-1 bg-[#F5E7CF] p-6 sm:p-10">
+            <div className="relative aspect-square flex-1 bg-cream-100 p-6 sm:p-10">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={imageIdx}
@@ -157,7 +157,7 @@ export function ProductDetailModal({
               </AnimatePresence>
 
               { }
-              <div className="absolute left-4 top-4 rounded-full bg-[#E53935] px-3 py-1.5 text-xs font-bold text-white shadow-lg">
+              <div className="absolute left-4 top-4 rounded-full bg-sale px-3 py-1.5 text-xs font-bold text-white shadow-lg">
                 Hemat {savingsPercent}%
               </div>
             </div>
@@ -247,7 +247,7 @@ export function ProductDetailModal({
                 className={cn(
                   "font-medium",
                   product.stockRemaining <= 3
-                    ? "text-[#E53935]"
+                    ? "text-sale"
                     : "text-green-600",
                 )}
               >
@@ -263,7 +263,7 @@ export function ProductDetailModal({
               <span className="text-base text-charcoal-500 line-through">
                 Rp{formatIDR(product.originalPrice)}
               </span>
-              <span className="rounded-full bg-[#E53935]/10 px-2.5 py-0.5 text-xs font-bold text-[#E53935]">
+              <span className="rounded-full bg-sale/10 px-2.5 py-0.5 text-xs font-bold text-sale">
                 -{savingsPercent}%
               </span>
             </div>

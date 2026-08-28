@@ -75,7 +75,7 @@ export function FaqSection() {
                   className={cn(
                     'rounded-[1.25rem] border p-6 transition-all duration-300',
                     isOpen
-                      ? 'border-caramel bg-white shadow-[0_24px_48px_-32px_rgba(34,81,56,0.35)]'
+                      ? 'border-caramel bg-white shadow-[0_24px_48px_-32px_rgba(27,77,50,0.35)]'
                       : 'border-transparent bg-cream hover:border-caramel/50',
                   )}
                 >

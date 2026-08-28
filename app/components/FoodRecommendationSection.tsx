@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 import { useCatalog } from "@/lib/catalog";
 import type { FoodItem } from "@/lib/types";
 import { FoodCard } from "@/app/components/FoodCard";
-import { SoftBlob } from "@/app/components/ornaments";
+import { PageHeader } from "@/app/components/page-header";
+import { SectionShell } from "@/app/components/section-shell";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50";
@@ -86,24 +87,17 @@ export function FoodRecommendationSection({ onViewDetail }: { onViewDetail?: (id
   };
 
   return (
-    <section
+    <SectionShell
       id="rekomendasiMakanan"
-      data-nav="cream"
-      className="relative overflow-hidden scroll-mt-24 bg-cream-50 py-16 lg:py-20"
+      dataNav="cream"
+      tone="cream"
+      className="scroll-mt-24"
     >
-      <SoftBlob className="-left-24 top-1/3 h-80 w-80 bg-sage-100/60" />
-      <SoftBlob className="-right-24 bottom-0 h-96 w-96 bg-forest-900/5" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="font-sans text-[22px] font-bold tracking-tight text-charcoal-900 sm:text-[28px]">
-              Menu unggulan hari ini
-            </h2>
-            <p className="mt-1.5 max-w-md font-sans text-sm text-charcoal-500">
-              Pilihan makanan surplus dengan rating terbaik dari UMKM terdekat.
-            </p>
-          </div>
+          <PageHeader
+            title="Menu unggulan hari ini"
+            subtitle="Pilihan makanan surplus dengan rating terbaik dari UMKM terdekat."
+          />
           <a
             href="#umkm"
             onClick={(e) => {
@@ -135,8 +129,8 @@ export function FoodRecommendationSection({ onViewDetail }: { onViewDetail?: (id
                 className={cn(
                   "rounded-full border px-4 py-2 font-sans text-sm font-semibold transition-all duration-200",
                   isActive
-                    ? "border-transparent bg-[#C8A882] text-white shadow-md shadow-[#C8A882]/25 hover:bg-[#7A4E35]"
-                    : "border-sage-100 bg-white text-charcoal-500 hover:border-[#C8A882]/30 hover:text-[#C8A882]",
+                    ? "border-transparent bg-caramel text-white shadow-md shadow-caramel/25 hover:bg-caramel-dark"
+                    : "border-sage-100 bg-white text-charcoal-500 hover:border-caramel/30 hover:text-caramel",
                   FOCUS_RING,
                 )}
               >
@@ -166,7 +160,7 @@ export function FoodRecommendationSection({ onViewDetail }: { onViewDetail?: (id
             disabled={!canLeft}
             aria-label="Geser rekomendasi makanan ke kiri"
             className={cn(
-              "absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-[#C8A882] hover:text-white active:scale-[0.95] sm:-left-5 sm:h-11 sm:w-11",
+              "absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-caramel hover:text-white active:scale-[0.95] sm:-left-5 sm:h-11 sm:w-11",
               !canLeft &&
                 "cursor-default opacity-35 hover:bg-white hover:text-charcoal-900",
               FOCUS_RING,
@@ -232,7 +226,7 @@ export function FoodRecommendationSection({ onViewDetail }: { onViewDetail?: (id
             disabled={!canRight}
             aria-label="Geser rekomendasi makanan ke kanan"
             className={cn(
-              "absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-[#C8A882] hover:text-white active:scale-[0.95] sm:-right-5 sm:h-11 sm:w-11",
+              "absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-caramel hover:text-white active:scale-[0.95] sm:-right-5 sm:h-11 sm:w-11",
               !canRight &&
                 "cursor-default opacity-35 hover:bg-white hover:text-charcoal-900",
               FOCUS_RING,
@@ -241,7 +235,6 @@ export function FoodRecommendationSection({ onViewDetail }: { onViewDetail?: (id
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

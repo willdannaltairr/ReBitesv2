@@ -69,19 +69,19 @@ function Field({
       <div className="mb-1.5 flex items-baseline justify-between gap-4">
         <label
           htmlFor={id}
-          className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]"
+          className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone"
         >
           {label}
         </label>
         {hint}
       </div>
-      <div className="group flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-2 transition-colors duration-200 focus-within:border-[#225138] focus-within:ring-1 focus-within:ring-[#225138]/15">
-        <Icon className="h-3.5 w-3.5 shrink-0 text-[#6B6A63]/55 transition-colors duration-200 group-focus-within:text-[#225138]" />
+      <div className="group flex items-center gap-2 rounded-lg border border-hairline bg-white px-3 py-2 transition-colors duration-200 focus-within:border-green-700 focus-within:ring-1 focus-within:ring-green-700/15">
+        <Icon className="h-3.5 w-3.5 shrink-0 text-stone/55 transition-colors duration-200 group-focus-within:text-green-700" />
         <input
           id={id}
           type={isPassword && showPassword ? "text" : type}
           {...inputProps}
-          className="w-full bg-transparent py-1 font-sans text-[14px] leading-none text-[#1B3F2C] outline-none placeholder:text-[#9A9994]"
+          className="w-full bg-transparent py-1 font-sans text-[14px] leading-none text-forest-800 outline-none placeholder:text-stone"
         />
         {isPassword && (
           <button
@@ -91,7 +91,7 @@ function Field({
               showPassword ? "Sembunyikan password" : "Tampilkan password"
             }
             aria-pressed={showPassword}
-            className="shrink-0 rounded-sm p-0.5 text-[#6B6A63]/55 transition-colors duration-200 hover:text-[#225138] focus-visible:text-[#225138] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#225138]/30"
+            className="shrink-0 rounded-sm p-0.5 text-stone/55 transition-colors duration-200 hover:text-green-700 focus-visible:text-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-700/30"
           >
             {showPassword ? (
               <EyeOff className="h-4 w-4" />
@@ -214,7 +214,7 @@ export default function AuthForm({
       <motion.div variants={itemVariants} className="mb-3 flex-shrink-0">
         <Link
           href="/"
-          className="group inline-flex items-center gap-1.5 rounded-full py-1 pr-2 font-sans text-[13px] font-medium text-[#6B6A63] transition-colors duration-200 hover:text-[#225138]"
+          className="group inline-flex items-center gap-1.5 rounded-full py-1 pr-2 font-sans text-[13px] font-medium text-stone transition-colors duration-200 hover:text-green-700"
         >
           <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
           Kembali
@@ -225,23 +225,23 @@ export default function AuthForm({
         variants={itemVariants}
         className="mb-5 flex items-center justify-center gap-2 lg:hidden flex-shrink-0"
       >
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#225138] text-[#F7F5EF]">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-700 text-cream">
           <Leaf className="h-[15px] w-[15px]" strokeWidth={1.75} />
         </span>
-        <span className="font-display text-lg font-semibold tracking-tight text-[#225138]">
+        <span className="font-display text-lg font-semibold tracking-tight text-green-700">
           ReBites
         </span>
       </motion.div>
 
       <motion.h1
         variants={itemVariants}
-        className="font-display text-[22px] font-bold leading-[1.1] tracking-[-0.02em] text-[#14261E] flex-shrink-0"
+        className="font-display text-[22px] font-bold leading-[1.1] tracking-[-0.02em] text-charcoal-900 flex-shrink-0"
       >
         {title}
       </motion.h1>
       <motion.p
         variants={itemVariants}
-        className="mt-1.5 font-sans text-[13px] leading-relaxed text-[#6B6A63] flex-shrink-0"
+        className="mt-1.5 font-sans text-[13px] leading-relaxed text-stone flex-shrink-0"
       >
         {subtitle}
       </motion.p>
@@ -252,7 +252,7 @@ export default function AuthForm({
         onSubmit={handleSubmit}
         noValidate
       >
-        <div className="grid gap-4 overflow-y-auto overscroll-contain pr-1.5 -mr-1.5 pb-1 [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#E5E7EB] [&::-webkit-scrollbar-track]:bg-transparent min-h-0">
+        <div className="grid gap-4 overflow-y-auto overscroll-contain pr-1.5 -mr-1.5 pb-1 [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-hairline [&::-webkit-scrollbar-track]:bg-transparent min-h-0">
         {isSignup && (
           <Field
             id="fullName"
@@ -293,7 +293,7 @@ export default function AuthForm({
             !isSignup ? (
               <Link
                 href="/auth/forgotPassword"
-                className="font-sans text-[11px] text-[#6B6A63] underline underline-offset-4 transition-colors hover:text-[#225138]"
+                className="font-sans text-[11px] text-stone underline underline-offset-4 transition-colors hover:text-green-700"
               >
                 Lupa password?
               </Link>
@@ -311,7 +311,7 @@ export default function AuthForm({
         <button
           type="submit"
           disabled={loading || confirmEmailOpen}
-          className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-[#143B2D] px-5 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition-colors duration-200 hover:bg-[#0F2E24] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#225138] disabled:cursor-not-allowed disabled:opacity-70 flex-shrink-0"
+          className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-forest-dark px-5 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition-colors duration-200 hover:bg-forest-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 disabled:cursor-not-allowed disabled:opacity-70 flex-shrink-0"
         >
           {loading ? (isSignup ? "Mendaftar" : "Masuk") : submitLabel}
           <ArrowRight className="h-4 w-4" />
@@ -320,29 +320,29 @@ export default function AuthForm({
 
       <motion.p
         variants={itemVariants}
-        className="mt-5 text-center font-sans text-[13px] text-[#6B6A63] flex-shrink-0"
+        className="mt-5 text-center font-sans text-[13px] text-stone flex-shrink-0"
       >
         {bottomHint.text}{" "}
         <Link
           href={bottomHint.href}
-          className="font-semibold text-[#225138] underline underline-offset-4 transition-colors hover:text-[#1B3F2C]"
+          className="font-semibold text-green-700 underline underline-offset-4 transition-colors hover:text-forest-800"
         >
           {bottomHint.linkText}
         </Link>
       </motion.p>
 
       <Dialog open={confirmEmailOpen} onOpenChange={setConfirmEmailOpen}>
-        <DialogContent className="max-w-sm rounded-2xl border-[#DEDACF] bg-white p-6">
+        <DialogContent className="max-w-sm rounded-2xl border-hairline bg-white p-6">
           <DialogHeader>
-            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#225138]/10 text-[#225138]">
+            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-700/10 text-green-700">
               <MailCheck className="h-6 w-6" />
             </span>
-            <DialogTitle className="text-center font-display text-lg font-medium tracking-tight text-[#225138]">
+            <DialogTitle className="text-center font-display text-lg font-medium tracking-tight text-green-700">
               Cek Email Kamu
             </DialogTitle>
-            <DialogDescription className="text-center font-sans text-sm leading-relaxed text-[#6B6A63]">
+            <DialogDescription className="text-center font-sans text-sm leading-relaxed text-stone">
               Registrasi berhasil! Kami mengirim tautan konfirmasi ke{" "}
-              <span className="font-semibold text-[#1B3F2C]">
+              <span className="font-semibold text-forest-800">
                 {email.trim()}
               </span>
               . Langkah selanjutnya: buka email tersebut, klik tautan
@@ -352,7 +352,7 @@ export default function AuthForm({
           </DialogHeader>
           <Link
             href="/auth/login"
-            className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-md bg-[#225138] px-5 font-sans text-[13px] font-semibold uppercase tracking-[0.14em] text-[#F7F5EF] transition-colors duration-200 hover:bg-[#1B3F2C]"
+            className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-md bg-green-700 px-5 font-sans text-[13px] font-semibold uppercase tracking-[0.14em] text-cream transition-colors duration-200 hover:bg-forest-800"
           >
             Ke Halaman Masuk
           </Link>

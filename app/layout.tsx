@@ -1,13 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Be_Vietnam_Pro, Plus_Jakarta_Sans } from 'next/font/google';
+import { Fraunces, Be_Vietnam_Pro } from 'next/font/google';
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
-  style: ['normal'],
+  style: ['normal', 'italic'],
   preload: false,
 });
 
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${plusJakartaSans.variable} ${beVietnamPro.variable}`}
+      className={`${fraunces.variable} ${beVietnamPro.variable}`}
     >
       <body className="font-sans antialiased">{children}</body>
     </html>

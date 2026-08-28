@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { SearchX } from "lucide-react";
 import DetailPage from "@/app/components/detail/detail-page";
+import { EmptyState } from "@/app/components/empty-state";
 import type {
   ProductDetail,
   RelatedProduct,
@@ -67,19 +69,21 @@ export function DetailProductContent() {
 
   if (status === "not-found" || !product) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-cream-50 px-6 text-center">
-        <p className="font-sans text-lg font-bold text-charcoal-900">
-          Produk tidak ditemukan
-        </p>
-        <p className="max-w-sm text-sm leading-relaxed text-charcoal-500">
-          Menu yang kamu cari mungkin sudah habis atau dihapus penjualnya.
-        </p>
-        <a
-          href="/"
-          className="mt-2 rounded-full bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
-        >
-          Kembali ke Beranda
-        </a>
+      <div className="flex min-h-screen items-center bg-cream-50 px-6">
+        <EmptyState
+          className="mx-auto w-full max-w-md"
+          icon={<SearchX className="h-6 w-6" aria-hidden />}
+          title="Produk tidak ditemukan"
+          description="Menu yang kamu cari mungkin sudah habis atau dihapus penjualnya."
+          action={
+            <a
+              href="/"
+              className="mt-2 rounded-full bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+            >
+              Kembali ke Beranda
+            </a>
+          }
+        />
       </div>
     );
   }

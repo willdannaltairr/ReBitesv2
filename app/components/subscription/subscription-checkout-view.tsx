@@ -23,6 +23,8 @@ import {
 } from '@/lib/subscription-plans';
 import { saveSubscription } from '@/lib/subscription-storage';
 import { supabase } from '@/lib/supabase';
+import { PageHeader } from '@/app/components/page-header';
+import { EmptyState } from '@/app/components/empty-state';
 
 export function SubscriptionCheckoutView() {
   const router = useRouter();
@@ -65,18 +67,18 @@ export function SubscriptionCheckoutView() {
 
   if (!plan) {
     return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center rounded-2xl border border-hairline bg-white px-6 py-14 text-center">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cream-100 text-green-700">
-          <CreditCard className="h-6 w-6" />
-        </span>
-        <h1 className="mt-5 font-display text-xl font-medium tracking-tight text-charcoal-900">Paket tidak tersedia</h1>
-        <Link
-          href="/dashboard/penjual/langganan"
-          className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-[#225138] px-6 text-sm font-semibold text-white hover:bg-[#143B2D]"
-        >
-          Pilih Paket
-        </Link>
-      </div>
+      <EmptyState
+        icon={<CreditCard className="h-6 w-6" aria-hidden />}
+        title="Paket tidak tersedia"
+        action={
+          <Link
+            href="/dashboard/penjual/langganan"
+            className="inline-flex h-11 items-center gap-2 rounded-full bg-green-700 px-6 text-sm font-semibold text-white hover:bg-forest-dark"
+          >
+            Pilih Paket
+          </Link>
+        }
+      />
     );
   }
 
@@ -157,7 +159,7 @@ export function SubscriptionCheckoutView() {
         type="button"
         onClick={() => router.back()}
         disabled={processing}
-        className="inline-flex h-9 items-center gap-1.5 -ml-2 rounded-full px-2 text-[13px] font-semibold text-charcoal-500 transition-colors hover:bg-white hover:text-[#225138] disabled:pointer-events-none disabled:opacity-50"
+        className="inline-flex h-9 items-center gap-1.5 -ml-2 rounded-full px-2 text-[13px] font-semibold text-charcoal-500 transition-colors hover:bg-white hover:text-green-700 disabled:pointer-events-none disabled:opacity-50"
       >
         <ArrowLeft className="h-4 w-4" />
         Kembali
@@ -165,12 +167,10 @@ export function SubscriptionCheckoutView() {
 
       {/* Header 1 halaman penuh - bukan popup */}
       <section className="mt-4">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-[#225138] sm:text-3xl">
-          Pilih Paket Langganan
-        </h1>
-        <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[#6B6A63]">
-          Pilih antara Standar dan Max. Klik card untuk mengganti — detail di bawah akan mengikuti pilihanmu. Pembayaran via Xendit.
-        </p>
+        <PageHeader
+          title="Pilih Paket Langganan"
+          subtitle="Pilih antara Standar dan Max. Klik card untuk mengganti — detail di bawah akan mengikuti pilihanmu. Pembayaran via Xendit."
+        />
       </section>
 
       {/* 2 card chooser - menggantikan 4 card foto */}
@@ -186,36 +186,36 @@ export function SubscriptionCheckoutView() {
               onClick={() => setSelectedSlug(p.slug as 'standar' | 'premium')}
               className={`relative flex flex-col rounded-2xl border bg-white p-5 text-left transition-all ${
                 isSelected
-                  ? 'border-[#225138] bg-[#F7F5EF] shadow-sm ring-1 ring-[#225138]/20'
-                  : 'border-[#DEDACF] hover:border-[#AEB89B] hover:bg-white'
+                  ? 'border-green-700 bg-cream shadow-sm ring-1 ring-green-700/20'
+                  : 'border-hairline hover:border-[#AEB89B] hover:bg-white'
               }`}
             >
               {/* Radio dot like foto */}
               <span
                 className={`absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border-2 ${
-                  isSelected ? 'border-[#225138] bg-[#225138]' : 'border-[#DEDACF] bg-white'
+                  isSelected ? 'border-green-700 bg-green-700' : 'border-hairline bg-white'
                 }`}
               >
                 {isSelected && <span className="h-2 w-2 rounded-full bg-white" />}
               </span>
 
-              <h3 className="font-display text-lg font-semibold text-[#225138]">ReBites {p.name}</h3>
-              <p className="mt-1 min-h-[2.2rem] text-xs leading-relaxed text-[#6B6A63]">{p.tagline}</p>
+              <h3 className="font-display text-lg font-semibold text-green-700">ReBites {p.name}</h3>
+              <p className="mt-1 min-h-[2.2rem] text-xs leading-relaxed text-stone">{p.tagline}</p>
               <p className="mt-3">
-                <span className="font-display text-2xl font-bold text-[#225138]">{formatRupiah(pPrice)}</span>
-                <span className="ml-1 text-xs text-[#6B6A63]">/ {billing === 'yearly' ? 'tahun' : 'bulan'}</span>
+                <span className="font-display text-2xl font-bold text-green-700">{formatRupiah(pPrice)}</span>
+                <span className="ml-1 text-xs text-stone">/ {billing === 'yearly' ? 'tahun' : 'bulan'}</span>
               </p>
-              <p className="mt-1 text-[11px] text-[#9A9994]">+ Pajak 2% → {formatRupiah(pTotal)}</p>
+              <p className="mt-1 text-[11px] text-stone">+ Pajak 2% → {formatRupiah(pTotal)}</p>
               <ul className="mt-3 space-y-1.5">
                 {p.features.slice(0, 3).map((f) => (
-                  <li key={f} className="flex gap-1.5 text-[12px] leading-snug text-[#225138]">
-                    <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#225138]" />
+                  <li key={f} className="flex gap-1.5 text-[12px] leading-snug text-green-700">
+                    <Check className="mt-0.5 h-3 w-3 shrink-0 text-green-700" />
                     {f}
                   </li>
                 ))}
               </ul>
               {isSelected && (
-                <span className="absolute -top-2 right-8 rounded-full bg-[#225138] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                <span className="absolute -top-2 right-8 rounded-full bg-green-700 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                   Dipilih
                 </span>
               )}
@@ -227,51 +227,51 @@ export function SubscriptionCheckoutView() {
       {/* Full page detail - bukan popup, 1 halaman */}
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-5">
         {/* LEFT - Rincian pure detail tanpa input */}
-        <div className="rounded-2xl border border-[#DEDACF] bg-white p-6 shadow-sm sm:p-7 lg:col-span-3">
-          <h2 className="font-display text-[18px] font-semibold tracking-tight text-[#225138]">Rincian Pembayaran</h2>
-          <p className="mt-1 text-[13px] leading-relaxed text-[#6B6A63]">
+        <div className="rounded-2xl border border-hairline bg-white p-6 shadow-sm sm:p-7 lg:col-span-3">
+          <h2 className="font-display text-[18px] font-semibold tracking-tight text-green-700">Rincian Pembayaran</h2>
+          <p className="mt-1 text-[13px] leading-relaxed text-stone">
             ReBites {plan.name} — {billing === 'yearly' ? 'Tahunan' : 'Bulanan'} • berlaku s.d. {periodEndLabel}
           </p>
 
           {userEmail && (
-            <p className="mt-4 rounded-lg bg-[#F7F5EF] px-3 py-2 text-[12px] text-[#6B6A63]">
-              Pembayaran untuk <span className="font-semibold text-[#225138]">{userEmail}</span> — akan diproses via Xendit
+            <p className="mt-4 rounded-lg bg-cream px-3 py-2 text-[12px] text-stone">
+              Pembayaran untuk <span className="font-semibold text-green-700">{userEmail}</span> — akan diproses via Xendit
             </p>
           )}
 
-          <div className="mt-6 rounded-xl border border-[#DEDACF] bg-[#FCFCF9] p-4">
+          <div className="mt-6 rounded-xl border border-hairline bg-cream-50 p-4">
             <div className="flex items-center justify-between gap-3 text-[13px]">
-              <span className="text-[#6B6A63]">Paket terpilih</span>
-              <span className="font-semibold text-[#225138]">ReBites {plan.name}</span>
+              <span className="text-stone">Paket terpilih</span>
+              <span className="font-semibold text-green-700">ReBites {plan.name}</span>
             </div>
             <div className="mt-2 flex items-center justify-between gap-3 text-[13px]">
-              <span className="text-[#6B6A63]">Periode</span>
-              <span className="font-medium text-[#225138]">{billing === 'yearly' ? 'Tahunan' : 'Bulanan'}</span>
+              <span className="text-stone">Periode</span>
+              <span className="font-medium text-green-700">{billing === 'yearly' ? 'Tahunan' : 'Bulanan'}</span>
             </div>
             <div className="mt-2 flex items-center justify-between gap-3 text-[13px]">
-              <span className="text-[#6B6A63]">Fitur utama</span>
-              <span className="max-w-[60%] truncate text-right text-[#225138]">{plan.features[0]}</span>
+              <span className="text-stone">Fitur utama</span>
+              <span className="max-w-[60%] truncate text-right text-green-700">{plan.features[0]}</span>
             </div>
           </div>
 
-          <dl className="mt-6 space-y-3 border-t border-[#DEDACF] pt-5">
+          <dl className="mt-6 space-y-3 border-t border-hairline pt-5">
             <div className="flex items-center justify-between text-[14px]">
-              <dt className="text-[#6B6A63]">Subtotal</dt>
-              <dd className="font-medium tabular-nums text-[#225138]">{formatRupiah(subtotal)}</dd>
+              <dt className="text-stone">Subtotal</dt>
+              <dd className="font-medium tabular-nums text-green-700">{formatRupiah(subtotal)}</dd>
             </div>
             <div className="flex items-center justify-between text-[14px]">
-              <dt className="text-[#6B6A63]">Pajak 2%</dt>
-              <dd className="font-medium tabular-nums text-[#225138]">{isFree ? '—' : formatRupiah(tax)}</dd>
+              <dt className="text-stone">Pajak 2%</dt>
+              <dd className="font-medium tabular-nums text-green-700">{isFree ? '—' : formatRupiah(tax)}</dd>
             </div>
-            <div className="flex items-center justify-between border-t border-[#DEDACF] pt-3">
-              <dt className="text-[14px] font-semibold text-[#225138]">Total</dt>
-              <dd className="font-display text-[18px] font-semibold tabular-nums text-[#225138]">{isFree ? 'Gratis' : formatRupiah(total)}</dd>
+            <div className="flex items-center justify-between border-t border-hairline pt-3">
+              <dt className="text-[14px] font-semibold text-green-700">Total</dt>
+              <dd className="font-display text-[18px] font-semibold tabular-nums text-green-700">{isFree ? 'Gratis' : formatRupiah(total)}</dd>
             </div>
           </dl>
 
-          <div className="mt-5 flex gap-2 rounded-xl border border-[#AEB89B]/40 bg-[#EAF2EC] px-3 py-2.5">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#225138]" />
-            <p className="text-[12px] leading-relaxed text-[#225138]">
+          <div className="mt-5 flex gap-2 rounded-xl border border-sage/40 bg-green-50 px-3 py-2.5">
+            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-green-700" />
+            <p className="text-[12px] leading-relaxed text-green-700">
               Tidak ada form yang perlu diisi. Klik bayar untuk lanjut ke Xendit (QRIS, GoPay, OVO, DANA, ShopeePay, VA, Kartu).
             </p>
           </div>
@@ -290,7 +290,7 @@ export function SubscriptionCheckoutView() {
             type="button"
             onClick={handlePay}
             disabled={processing}
-            className="mt-6 inline-flex h-[46px] w-full items-center justify-center gap-2 rounded-full bg-[#225138] px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(34,81,56,0.20)] transition-colors hover:bg-[#143B2D] disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-6 inline-flex h-[46px] w-full items-center justify-center gap-2 rounded-full bg-green-700 px-5 text-[14px] font-semibold text-white shadow-[0_8px_20px_rgba(27,77,50,0.20)] transition-colors hover:bg-forest-dark disabled:cursor-not-allowed disabled:opacity-50"
           >
             {processing ? (
               <>
@@ -303,56 +303,56 @@ export function SubscriptionCheckoutView() {
               `Bayar ${formatRupiah(total)} via Xendit`
             )}
           </button>
-          <p className="mt-2.5 text-center text-[11px] text-[#9A9994]">Aman & terverifikasi otomatis oleh Xendit. Pajak 2% sudah termasuk.</p>
+          <p className="mt-2.5 text-center text-[11px] text-stone">Aman & terverifikasi otomatis oleh Xendit. Pajak 2% sudah termasuk.</p>
         </div>
 
         {/* RIGHT - Plan include pure detail */}
-        <div className="flex flex-col overflow-hidden rounded-2xl border border-[#DEDACF] bg-white shadow-sm lg:col-span-2">
-          <div className="bg-[#F7F5EF] px-6 py-5">
-            <h3 className="font-display text-[15px] font-semibold text-[#225138]">ReBites {plan.name} Plan</h3>
-            <p className="mt-1 text-xs text-[#6B6A63]">Plan include:</p>
+        <div className="flex flex-col overflow-hidden rounded-2xl border border-hairline bg-white shadow-sm lg:col-span-2">
+          <div className="bg-cream px-6 py-5">
+            <h3 className="font-display text-[15px] font-semibold text-green-700">ReBites {plan.name} Plan</h3>
+            <p className="mt-1 text-xs text-stone">Plan include:</p>
           </div>
           <div className="flex-1 bg-white px-6 py-5">
             <ul className="space-y-2.5">
               {plan.features.map((feature) => (
                 <li key={feature} className="flex gap-2.5 text-[13px] leading-snug">
-                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#225138]" />
-                  <span className="text-[#225138]">{feature}</span>
+                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-green-700" />
+                  <span className="text-green-700">{feature}</span>
                 </li>
               ))}
               <li className="flex gap-2.5 text-[13px] leading-snug">
-                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#225138]" />
-                <span className="text-[#225138]">Pembayaran aman via Xendit</span>
+                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-green-700" />
+                <span className="text-green-700">Pembayaran aman via Xendit</span>
               </li>
             </ul>
 
-            <div className="mt-6 rounded-xl border border-[#DEDACF] bg-[#F7F5EF] p-4">
+            <div className="mt-6 rounded-xl border border-hairline bg-cream p-4">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-[#6B6A63]">Subtotal</span>
-                <span className="font-medium text-[#225138]">{formatRupiah(subtotal)}</span>
+                <span className="text-stone">Subtotal</span>
+                <span className="font-medium text-green-700">{formatRupiah(subtotal)}</span>
               </div>
               <div className="flex items-center justify-between text-sm mt-2">
-                <span className="text-[#6B6A63]">Pajak 2%</span>
-                <span className="font-medium text-[#225138]">{formatRupiah(tax)}</span>
+                <span className="text-stone">Pajak 2%</span>
+                <span className="font-medium text-green-700">{formatRupiah(tax)}</span>
               </div>
-              <div className="mt-2 flex items-center justify-between border-t border-[#DEDACF] pt-2 font-semibold">
-                <span className="text-[#225138]">Total</span>
-                <span className="text-[#225138]">{formatRupiah(total)}</span>
+              <div className="mt-2 flex items-center justify-between border-t border-hairline pt-2 font-semibold">
+                <span className="text-green-700">Total</span>
+                <span className="text-green-700">{formatRupiah(total)}</span>
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-2.5 rounded-full bg-[#F7F5EF] px-3.5 py-2 ring-1 ring-black/5">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#225138] text-white">
+            <div className="mt-6 flex items-center gap-2.5 rounded-full bg-cream px-3.5 py-2 ring-1 ring-black/5">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-green-700 text-white">
                 <Check className="h-3.5 w-3.5" strokeWidth={3} />
               </span>
-              <span className="text-[12px] font-medium text-[#225138]">Pembayaran via Xendit — aman & instan</span>
+              <span className="text-[12px] font-medium text-green-700">Pembayaran via Xendit — aman & instan</span>
             </div>
           </div>
         </div>
       </div>
 
-      <p className="mx-auto mt-6 flex items-center justify-center gap-1.5 text-center text-[11px] text-[#6B6A63]">
-        <ShieldCheck className="h-3.5 w-3.5 text-[#225138]" />
+      <p className="mx-auto mt-6 flex items-center justify-center gap-1.5 text-center text-[11px] text-stone">
+        <ShieldCheck className="h-3.5 w-3.5 text-green-700" />
         1 halaman penuh, tanpa form. Klik card Standar/Max di atas untuk ganti pilihan.
       </p>
     </>

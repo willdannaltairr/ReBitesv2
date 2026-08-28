@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useCatalog } from '@/lib/catalog';
 import { VendorCard } from '@/app/components/VendorCard';
-import { SoftBlob } from '@/app/components/ornaments';
+import { PageHeader } from '@/app/components/page-header';
+import { SectionShell } from '@/app/components/section-shell';
 import { SELLER_VENDOR_SLUG } from '@/lib/product-storage';
 import { useSellerPlan } from '@/lib/seller-plan';
 
@@ -56,22 +57,17 @@ export function VendorSection() {
   }, []);
 
   return (
-    <section
+    <SectionShell
       id="umkm"
-      data-nav="cream"
-      className="relative overflow-hidden scroll-mt-24 bg-cream-50 pb-16 pt-16 lg:pb-20 lg:pt-20"
+      dataNav="cream"
+      tone="cream"
+      className="scroll-mt-24"
     >
-      <SoftBlob className="-right-24 top-1/4 h-80 w-80 bg-sage-100/60" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="font-sans text-[22px] font-bold tracking-tight text-charcoal-900 sm:text-[28px]">
-              Rekomendasi buat kamu sayang
-            </h2>
-            <p className="mt-1.5 max-w-md font-sans text-sm text-charcoal-500">
-              Toko lokal yang rutin menyelamatkan makanan surplusnya setiap hari. Dukung mereka.
-            </p>
-          </div>
+          <PageHeader
+            title="Rekomendasi buat kamu sayang"
+            subtitle="Toko lokal yang rutin menyelamatkan makanan surplusnya setiap hari. Dukung mereka."
+          />
           <a
             href="/cari"
             className={cn(
@@ -90,7 +86,7 @@ export function VendorSection() {
             disabled={!canLeft}
             aria-label="Geser rekomendasi ke kiri"
             className={cn(
-              'absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-[#C8A882] hover:text-white active:scale-[0.95] sm:-left-5 sm:h-11 sm:w-11',
+              'absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-caramel hover:text-white active:scale-[0.95] sm:-left-5 sm:h-11 sm:w-11',
               !canLeft && 'cursor-default opacity-35 hover:bg-white hover:text-charcoal-900',
               FOCUS_RING
             )}
@@ -153,7 +149,7 @@ export function VendorSection() {
             disabled={!canRight}
             aria-label="Geser rekomendasi ke kanan"
             className={cn(
-              'absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-[#C8A882] hover:text-white active:scale-[0.95] sm:-right-5 sm:h-11 sm:w-11',
+              'absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-sage-100 bg-white text-charcoal-900 shadow-md shadow-forest-900/5 transition-all duration-200 hover:bg-caramel hover:text-white active:scale-[0.95] sm:-right-5 sm:h-11 sm:w-11',
               !canRight && 'cursor-default opacity-35 hover:bg-white hover:text-charcoal-900',
               FOCUS_RING
             )}
@@ -166,7 +162,6 @@ export function VendorSection() {
             Lihat Semua <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

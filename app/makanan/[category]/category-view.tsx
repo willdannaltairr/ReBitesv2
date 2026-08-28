@@ -26,6 +26,9 @@ import { useCatalog } from "@/lib/catalog";
 import type { FoodItem } from "@/lib/types";
 import { getCategoryBySlug } from "@/lib/categories";
 import { useProductDetail } from "@/app/detail/product/use-product-detail";
+import { PageHeader } from "@/app/components/page-header";
+import { SectionShell } from "@/app/components/section-shell";
+import { EmptyState } from "@/app/components/empty-state";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50";
@@ -232,8 +235,7 @@ export default function CategoryView({
       <Navbar />
 
       <main className="flex-1 pt-28">
-        <section data-nav="cream" className="bg-cream-50 pb-16 pt-6 lg:pb-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionShell dataNav="cream" tone="cream">
             {}
             <Link
               href="/home "
@@ -247,13 +249,12 @@ export default function CategoryView({
             </Link>
 
             {}
-            <header className="mt-6 max-w-2xl">
-              <h1 className="font-display text-3xl font-bold tracking-tight text-charcoal-900 sm:text-4xl">
-                {name}
-              </h1>
-              <p className="mt-2 text-sm text-charcoal-500 sm:text-base">
-                {description}
-              </p>
+            <div className="mt-6">
+              <PageHeader
+                eyebrow="Kategori"
+                title={name}
+                subtitle={description}
+              />
               <p
                 aria-live="polite"
                 className="mt-3 inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700"
@@ -262,7 +263,7 @@ export default function CategoryView({
                   ? "Memuat makanan…"
                   : `${filteredItems.length} makanan tersedia`}
               </p>
-            </header>
+            </div>
 
             {}
             <div className="mt-8 lg:mt-10">
@@ -418,57 +419,50 @@ export default function CategoryView({
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: EASE }}
-                className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-sage-200 bg-white px-6 py-16 text-center"
+                className="mt-6"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cream-100">
-                  <PackageOpen
-                    className="h-7 w-7 text-charcoal-500"
-                    aria-hidden
-                  />
-                </span>
-                <h2 className="mt-4 font-sans text-lg font-bold text-charcoal-900">
-                  Belum ada makanan di kategori ini
-                </h2>
-                <p className="mt-1 max-w-sm text-sm text-charcoal-500">
-                  Coba pilih kategori lain atau cek kembali beberapa saat lagi.
-                </p>
-                <Link
-                  href="/cari"
-                  className={cn(
-                    "mt-6 inline-flex items-center justify-center rounded-full bg-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-200 hover:bg-caramel active:scale-[0.98]",
-                    FOCUS_RING,
-                  )}
-                >
-                  Lihat Semua Makanan
-                </Link>
+                <EmptyState
+                  icon={<PackageOpen className="h-6 w-6" aria-hidden />}
+                  title="Belum ada makanan di kategori ini"
+                  description="Coba pilih kategori lain atau cek kembali beberapa saat lagi."
+                  action={
+                    <Link
+                      href="/cari"
+                      className={cn(
+                        "mt-4 inline-flex items-center justify-center rounded-full bg-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-200 hover:bg-caramel active:scale-[0.98]",
+                        FOCUS_RING,
+                      )}
+                    >
+                      Lihat Semua Makanan
+                    </Link>
+                  }
+                />
               </motion.div>
             ) : showNoResults ? (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: EASE }}
-                className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-sage-200 bg-white px-6 py-16 text-center"
+                className="mt-6"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-cream-100">
-                  <SearchX className="h-7 w-7 text-charcoal-500" aria-hidden />
-                </span>
-                <h2 className="mt-4 font-sans text-lg font-bold text-charcoal-900">
-                  Tidak ada makanan yang cocok
-                </h2>
-                <p className="mt-1 max-w-sm text-sm text-charcoal-500">
-                  Coba ubah pencarian atau filter yang digunakan.
-                </p>
-                <button
-                  type="button"
-                  onClick={resetAll}
-                  className={cn(
-                    "mt-6 inline-flex items-center gap-2 justify-center rounded-full bg-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-200 hover:bg-caramel active:scale-[0.98]",
-                    FOCUS_RING,
-                  )}
-                >
-                  <RotateCcw className="h-4 w-4" aria-hidden />
-                  Reset Filter
-                </button>
+                <EmptyState
+                  icon={<SearchX className="h-6 w-6" aria-hidden />}
+                  title="Tidak ada makanan yang cocok"
+                  description="Coba ubah pencarian atau filter yang digunakan."
+                  action={
+                    <button
+                      type="button"
+                      onClick={resetAll}
+                      className={cn(
+                        "mt-4 inline-flex items-center gap-2 justify-center rounded-full bg-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-green-700/20 transition-all duration-200 hover:bg-caramel active:scale-[0.98]",
+                        FOCUS_RING,
+                      )}
+                    >
+                      <RotateCcw className="h-4 w-4" aria-hidden />
+                      Reset Filter
+                    </button>
+                  }
+                />
               </motion.div>
             ) : (
               <motion.div
@@ -501,8 +495,7 @@ export default function CategoryView({
                 ))}
               </motion.div>
             )}
-          </div>
-        </section>
+        </SectionShell>
       </main>
 
       <SiteFooter />

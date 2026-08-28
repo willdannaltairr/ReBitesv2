@@ -3,19 +3,16 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { motion, MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Crown } from 'lucide-react';
 import { Reveal } from '@/app/components/reveal';
-import { DashboardDecor } from '@/app/components/dashboardPenjual/decor';
-import { Sidebar } from '@/app/components/dashboardPenjual/Sidebar';
-import { Topbar } from '@/app/components/dashboardPenjual/Topbar';
+import { SellerShell } from '@/app/components/dashboardPenjual/SellerShell';
 import { DetailedReportCard, type StatsPeriod } from '@/app/components/dashboardPenjual/DetailedReportCard';
 import { DemandAnalyticsCard } from '@/app/components/dashboardPenjual/DemandAnalyticsCard';
 import { FeaturedPromoCard } from '@/app/components/dashboardPenjual/FeaturedPromoCard';
 import { StoreCard } from '@/app/components/dashboardPenjual/StoreCard';
 import { StoreRatingCard } from '@/app/components/dashboardPenjual/StoreRatingCard';
 import { useSellerPlan } from '@/lib/seller-plan';
-import { useRequireSeller } from '@/hooks/use-require-seller';
 
 // Recharts berat (~ratusan KB) — dimuat hanya saat komponen ini tampil.
 const SalesStatsCard = dynamic(
@@ -32,10 +29,8 @@ const SalesStatsCard = dynamic(
 );
 
 export default function VendorDashboardPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [period, setPeriod] = useState<StatsPeriod>('7-hari');
   const { plan } = useSellerPlan();
-  const { loading } = useRequireSeller();
   const [firstName, setFirstName] = useState('');
 
   useEffect(() => {
@@ -55,92 +50,69 @@ export default function VendorDashboardPage() {
     };
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-cream-50">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-green-700 border-t-transparent" />
-      </div>
-    );
-  }
-
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="relative min-h-screen bg-cream-50 font-sans text-charcoal-900">
-        <DashboardDecor />
-
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-        <div className="relative z-10 lg:pl-[280px]">
-          <Topbar onMenuClick={() => setSidebarOpen(true)} />
-
-          <main className="mx-auto max-w-[1400px] px-4 pb-20 pt-6 sm:px-6 lg:px-10">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
+    <SellerShell>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-500">
+              Dashboard Penjual
+            </p>
+            <h1 className="mt-1 font-display text-[clamp(1.8rem,4vw,2.6rem)] font-medium leading-tight tracking-[-0.02em] text-forest-900">
+              Halo, <span className="font-extralight italic">{firstName}</span>
+            </h1>
+            <p className="mt-1 text-sm text-sage-500">
+              Pantau penjualan, pesanan masuk, dan limbah tokomu dari tiap porsi yang
+              terselamatkan.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-100 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-charcoal-900">
+              <Crown className="h-3.5 w-3.5 text-gold-500" />
+              Paket Aktif · {plan.label}
+            </span>
+            <Link
+              href="/dashboard/penjual/langganan"
+              className="inline-flex items-center gap-1.5 rounded-full border border-green-700 px-3.5 py-1.5 text-[11px] font-semibold text-green-700 transition-colors hover:bg-green-700/10"
             >
-              <div className="flex flex-wrap items-end justify-between gap-3">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-500">
-                    Dashboard Penjual
-                  </p>
-                  <h1 className="mt-1 font-display text-[clamp(1.8rem,4vw,2.6rem)] font-medium leading-tight tracking-[-0.02em] text-forest-900">
-                    Halo, <span className="font-extralight italic">{firstName}</span>
-                  </h1>
-                  <p className="mt-1 text-sm text-sage-500">
-                    Pantau penjualan, pesanan masuk, dan limbah tokomu dari tiap porsi yang
-                    terselamatkan.
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-100 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-charcoal-900">
-                    <Crown className="h-3.5 w-3.5 text-gold-500" />
-                    Paket Aktif · {plan.label}
-                  </span>
-                  { }
-                  <Link
-                    href="/dashboard/penjual/langganan"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-green-700 px-3.5 py-1.5 text-[11px] font-semibold text-green-700 transition-colors hover:bg-green-700/10"
-                  >
-                    Kelola Paket Langganan
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              Kelola Paket Langganan
+            </Link>
+          </div>
+        </div>
+      </motion.div>
 
-            <div className="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
-              { }
-              <div className="order-1 space-y-5 lg:order-2 lg:col-span-4 lg:space-y-6">
-                <Reveal delay={0.05}>
-                  <StoreCard />
-                </Reveal>
-                <Reveal delay={0.1}>
-                  <StoreRatingCard />
-                </Reveal>
-              </div>
+      <div className="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+        <div className="order-1 space-y-5 lg:order-2 lg:col-span-4 lg:space-y-6">
+          <Reveal delay={0.05}>
+            <StoreCard />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <StoreRatingCard />
+          </Reveal>
+        </div>
 
-              { }
-              <div className="order-2 space-y-5 lg:order-1 lg:col-span-8 lg:space-y-6">
-                <Reveal delay={0.05}>
-                  <SalesStatsCard period={period} onPeriodChange={setPeriod} />
-                </Reveal>
+        <div className="order-2 space-y-5 lg:order-1 lg:col-span-8 lg:space-y-6">
+          <Reveal delay={0.05}>
+            <SalesStatsCard period={period} onPeriodChange={setPeriod} />
+          </Reveal>
 
-                <Reveal delay={0.1}>
-                  <DetailedReportCard period={period} />
-                </Reveal>
+          <Reveal delay={0.1}>
+            <DetailedReportCard period={period} />
+          </Reveal>
 
-                <Reveal delay={0.15}>
-                  <DemandAnalyticsCard />
-                </Reveal>
+          <Reveal delay={0.15}>
+            <DemandAnalyticsCard />
+          </Reveal>
 
-                <Reveal delay={0.2}>
-                  <FeaturedPromoCard />
-                </Reveal>
-              </div>
-            </div>
-          </main>
+          <Reveal delay={0.2}>
+            <FeaturedPromoCard />
+          </Reveal>
         </div>
       </div>
-    </MotionConfig>
+    </SellerShell>
   );
 }

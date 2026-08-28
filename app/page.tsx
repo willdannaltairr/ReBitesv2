@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ArrowRight, Scale, Store, Users, Wallet, Star, Quote } from "lucide-react";
 import { SmoothScroll } from "@/app/components/smooth-scroll";
 import { Preloader } from "@/app/components/preloader";
@@ -9,12 +9,12 @@ import { SiteFooter } from "@/app/components/site-footer";
 import { Reveal, RevealWords } from "@/app/components/reveal";
 import { Counter } from "@/app/components/counter";
 import { Marquee } from "@/app/components/marquee";
-import { MagneticButton } from "@/app/components/magnetic-button";
 import HowItWorks from "@/app/components/HowItWorks";
 import { UrgentDealsSection } from "@/app/components/UrgentDealsSection";
 import { ProductDetailModal } from "@/app/components/ProductDetailModalLazy";
 import { useProductDetail } from "@/app/detail/product/use-product-detail";
 import { HeroSection } from "@/app/components/hero-section";
+import { SubscriptionSection } from "@/app/components/subscription/subscription-section";
 import { FaqSection } from "@/app/components/faq-section";
 import {
   Carousel,
@@ -27,7 +27,6 @@ import {
   AvatarImage,
   AvatarFallback,
 } from "@/app/components/ui/avatar";
-import { SUBSCRIPTION_PLANS } from "@/lib/subscription-plans";
 import { fetchVendors } from "@/lib/catalog";
 
 type Testimonial = {
@@ -131,7 +130,6 @@ const IMPACT_STATS = [
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
-  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
   const [testimonialApi, setTestimonialApi] = useState<CarouselApi>();
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
@@ -247,7 +245,7 @@ export default function Home() {
 
               <Reveal delay={0.2}>
                 <p className="mt-6 max-w-lg font-sans text-sm leading-[1.85] text-muted-foreground">
-                  <span className="font-semibold text-[#C8A882]">ReBites</span>{" "}
+                  <span className="font-semibold text-caramel">ReBites</span>{" "}
                   hadir sebagai marketplace makanan surplus yang mempertemukan
                   pelaku UMKM dengan masyarakat. Makanan yang sebelumnya
                   berpotensi terbuang dapat kembali memiliki nilai, sementara
@@ -260,9 +258,9 @@ export default function Home() {
               <Reveal delay={0.25}>
                 <p className="mt-4 max-w-lg font-sans text-sm leading-[1.85] text-muted-foreground">
                   Saat ini{" "}
-                  <span className="font-semibold text-[#C8A882]">ReBites</span>{" "}
+                  <span className="font-semibold text-caramel">ReBites</span>{" "}
                   beroperasi khusus di{" "}
-                  <span className="font-semibold text-[#C8A882]">
+                  <span className="font-semibold text-caramel">
                     Kota Depok
                   </span>
                   , sebagai langkah awal membangun ekosistem penyelamatan
@@ -274,8 +272,8 @@ export default function Home() {
             <div className="grid gap-4 sm:grid-cols-3">
               {IMPACT_STATS.map((stat, i) => (
                 <Reveal key={stat.label} delay={0.15 + i * 0.08}>
-                  <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-5 shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-6">
-                    <stat.icon className="mb-3 h-5 w-5 text-[#C8A882]" />
+                  <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-5 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-6">
+                    <stat.icon className="mb-3 h-5 w-5 text-caramel" />
 
                     <p className="flex items-baseline gap-1 whitespace-nowrap font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-none tracking-tight text-primary">
                       <Counter
@@ -302,9 +300,9 @@ export default function Home() {
 
           <Reveal delay={0.1}>
             <h3 className="mt-14 font-display text-[clamp(1.5rem,2.8vw,2.2rem)] font-light leading-[1.1] tracking-[-0.02em] text-primary lg:mt-20">
-              Untuk <span className="text-[#C8A882]">UMKM</span>. Untuk{" "}
-              <span className="text-[#C8A882]">masyarakat</span>. Untuk{" "}
-              <span className="text-[#C8A882]">lingkungan</span>.
+              Untuk <span className="text-caramel">UMKM</span>. Untuk{" "}
+              <span className="text-caramel">masyarakat</span>. Untuk{" "}
+              <span className="text-caramel">lingkungan</span>.
             </h3>
           </Reveal>
 
@@ -327,8 +325,8 @@ export default function Home() {
               },
             ].map((item, i) => (
               <Reveal key={item.num} delay={0.1 + i * 0.08}>
-                <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-7 shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-8">
-                  <span className="font-sans text-sm italic tracking-[0.2em] text-[#C8A882]">
+                <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-7 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-8">
+                  <span className="font-sans text-sm italic tracking-[0.2em] text-caramel">
                     {item.num}
                   </span>
 
@@ -348,225 +346,9 @@ export default function Home() {
 
       <HowItWorks />
 
-      <section
-        id="langganan"
-        data-nav="cream"
-        className="grain-overlay relative overflow-hidden bg-cream py-16 lg:py-20"
-      >
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/[0.06] blur-3xl" />
+      <SubscriptionSection />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal delay={0.1}>
-              <h2 className="mt-6 font-sans text-[clamp(2rem,4.5vw,3.5rem)] font-medium leading-[1.02] tracking-[-0.02em] text-primary">
-                Kembangkan usaha bersama{" "}
-                <span className="text-caramel">ReBites.</span>
-              </h2>
-            </Reveal>
-
-            <Reveal delay={0.15}>
-              <p className="mx-auto mt-5 max-w-xl font-sans text-sm leading-relaxed text-muted-foreground">
-                Pilih paket penjual yang sesuai dengan kebutuhan usaha Anda.
-                Kelola produk, pantau penjualan, dan dapatkan lebih banyak
-                kesempatan untuk menjangkau pelanggan melalui ReBites.
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <div className="mt-8 flex justify-center">
-                <div className="relative inline-flex items-center rounded-full border border-border bg-white p-1">
-                  {[
-                    { key: "monthly", label: "Bulanan" },
-                    { key: "yearly", label: "Tahunan" },
-                  ].map((mode) => {
-                    const active = billing === mode.key;
-
-                    return (
-                      <button
-                        key={mode.key}
-                        type="button"
-                        onClick={() =>
-                          setBilling(mode.key as "monthly" | "yearly")
-                        }
-                        className={`relative z-10 flex items-center gap-2 rounded-full px-5 py-2 font-sans text-xs font-medium tracking-tight transition-colors duration-300 ${
-                          active
-                            ? "text-primary-foreground"
-                            : "text-muted-foreground hover:text-caramel"
-                        }`}
-                      >
-                        {active && (
-                          <motion.span
-                            layoutId="billing-pill"
-                            className="absolute inset-0 rounded-full bg-caramel"
-                            transition={{
-                              type: "spring",
-                              stiffness: 320,
-                              damping: 28,
-                            }}
-                          />
-                        )}
-
-                        <span className="relative z-10">{mode.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          <div className="mx-auto mt-14 grid max-w-[1080px] gap-5 lg:mt-16 lg:grid-cols-3">
-            {SUBSCRIPTION_PLANS.map((plan, i) => {
-              const yearlyMode = billing === "yearly";
-
-              const priceValue = yearlyMode ? plan.yearly : plan.monthly;
-
-              const priceLabel =
-                priceValue === 0
-                  ? "Gratis"
-                  : `Rp${priceValue.toLocaleString("id-ID")}`;
-
-              const priceSuffix =
-                priceValue === 0 ? "" : yearlyMode ? "/tahun" : "/bulan";
-
-              const subLine =
-                plan.monthly === 0
-                  ? "Tidak Perlu Langganan"
-                  : yearlyMode
-                    ? `Setara Rp${Math.round(plan.yearly / 12).toLocaleString(
-                        "id-ID",
-                      )} / bulan`
-                    : `atau Rp${plan.yearly.toLocaleString("id-ID")} / tahun`;
-
-              return (
-                <Reveal key={plan.name} delay={i * 0.1} className="h-full">
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-background p-8 shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel lg:p-9">
-                    {plan.popular && (
-                      <div className="absolute right-5 top-5 rounded-full bg-caramel px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-                        Paling Populer
-                      </div>
-                    )}
-
-                    <div className="relative flex items-center justify-between">
-                      <span className="font-sans text-sm italic tracking-[0.2em] text-caramel">
-                        0{i + 1}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-4 font-sans text-2xl font-bold tracking-tight text-primary">
-                      ReBites {plan.name}
-                    </h3>
-
-                    <p className="mt-2 min-h-[2.5rem] max-w-[250px] font-sans text-xs leading-relaxed italic text-muted-foreground">
-                      {plan.tagline}
-                    </p>
-
-                    <div className="mt-6 flex min-h-[3.5rem] items-end gap-2 text-primary">
-                      <div className="relative flex h-[3.5rem] shrink-0 flex-col items-start">
-                        <div className="mt-auto overflow-hidden">
-                          <AnimatePresence mode="wait" initial={false}>
-                            <motion.span
-                              key={priceLabel}
-                              initial={{
-                                opacity: 0,
-                                y: 16,
-                              }}
-                              animate={{
-                                opacity: 1,
-                                y: 0,
-                              }}
-                              exit={{
-                                opacity: 0,
-                                y: -16,
-                              }}
-                              transition={{
-                                duration: 0.3,
-                                ease: [0.22, 1, 0.36, 1],
-                              }}
-                              className="block whitespace-nowrap font-sans text-[clamp(2.4rem,3vw,3rem)] font-light leading-[3rem] tracking-tight tabular-nums"
-                            >
-                              {priceLabel}
-                            </motion.span>
-                          </AnimatePresence>
-                        </div>
-                      </div>
-
-                      {priceSuffix && (
-                        <span className="mb-1 shrink-0 whitespace-nowrap font-sans text-sm text-muted-foreground">
-                          {priceSuffix}
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="mt-1 min-h-[2rem] font-sans text-xs text-muted-foreground">
-                      {subLine}
-                    </p>
-
-                    <div className="relative mt-7 pt-7 text-foreground/75">
-                      <span
-                        aria-hidden
-                        className="absolute inset-x-0 top-0 h-px"
-                        style={{
-                          background:
-                            "repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 10px)",
-                          opacity: 0.35,
-                        }}
-                      />
-
-                      <span
-                        aria-hidden
-                        className="absolute left-1/2 top-0 h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-caramel/50"
-                      />
-
-                      <ul className="space-y-3">
-                        {plan.features.map((feature, j) => (
-                          <li
-                            key={j}
-                            className="flex items-start gap-3 font-sans text-sm"
-                          >
-                            <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border border-caramel/30 text-caramel">
-                              <svg
-                                viewBox="0 0 10 10"
-                                className="h-2 w-2"
-                                aria-hidden
-                              >
-                                <path
-                                  d="M2 5.2l2 2 3.8-4"
-                                  stroke="currentColor"
-                                  strokeWidth="1.6"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </span>
-
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="relative mt-auto pt-8">
-                      <MagneticButton
-                        href={`/langganan/pembayaran?plan=${plan.slug}&billing=${billing}`}
-                        variant="outline"
-                        className="group w-full bg-white"
-                      >
-                        {plan.cta}
-
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                      </MagneticButton>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section
+<section
         id="testimoni"
         data-nav="green"
         className="grain-overlay relative overflow-hidden bg-primary py-16 lg:py-20"
@@ -599,7 +381,7 @@ export default function Home() {
                 type="button"
                 onClick={() => testimonialApi?.scrollPrev()}
                 aria-label="Testimoni sebelumnya"
-                className="absolute -left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-primary shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1/2 hover:border-caramel hover:bg-caramel hover:text-white sm:flex"
+                className="absolute -left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-primary shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1/2 hover:border-caramel hover:bg-caramel hover:text-white sm:flex"
               >
                 <ArrowRight className="h-4 w-4 rotate-180" />
               </button>
@@ -608,7 +390,7 @@ export default function Home() {
                 type="button"
                 onClick={() => testimonialApi?.scrollNext()}
                 aria-label="Testimoni berikutnya"
-                className="absolute -right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-primary shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1/2 hover:border-caramel hover:bg-caramel hover:text-white sm:flex"
+                className="absolute -right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-white text-primary shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1/2 hover:border-caramel hover:bg-caramel hover:text-white sm:flex"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -623,7 +405,7 @@ export default function Home() {
                       key={t.name}
                       className="basis-full pl-4 sm:basis-1/2 sm:pl-4 lg:basis-1/3 lg:pl-5"
                     >
-                      <div className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-white p-8 shadow-[0_10px_30px_-24px_rgba(34,81,56,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel/40 hover:shadow-[0_30px_60px_-28px_rgba(34,81,56,0.35)] lg:p-9">
+                      <div className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-border bg-white p-8 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel/40 hover:shadow-[0_30px_60px_-28px_rgba(27,77,50,0.35)] lg:p-9">
                         <span
                           aria-hidden
                           className="pointer-events-none absolute -top-3 right-4 select-none font-display text-[6rem] font-extralight leading-none text-caramel/[0.08] transition-colors duration-300 group-hover:text-caramel/15"

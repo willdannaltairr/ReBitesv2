@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { Menu } from 'lucide-react';
 import { ProfileSidebarNav } from '@/app/components/profile-sidebar-nav';
+import { PageHeader } from '@/app/components/page-header';
 
 export function RiwayatSidebarShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#F8F9FA] lg:bg-cream-50">
+    <div className="relative min-h-screen bg-cream-50 lg:bg-cream-50">
       <ProfileSidebarNav open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="lg:pl-[280px]">
@@ -27,11 +28,12 @@ export function RiwayatSidebarShell({ children }: { children: React.ReactNode })
 
         <main className="mx-auto max-w-[1100px] px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-8">
           {/* Desktop title - plain, no breadcrumb like photo's Home > My Account > My Orders excluded */}
-          <div className="hidden lg:block">
-            <p className="font-inter text-xs font-semibold uppercase tracking-widest text-sage-600">Pesanan Saya</p>
-            <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight text-forest-deep">My Orders</h1>
-            <p className="mt-1 text-sm text-stone">Kelola dan lacak transaksi makanan surplus kamu.</p>
-          </div>
+          <PageHeader
+            className="hidden lg:block"
+            eyebrow="Pesanan Saya"
+            title="My Orders"
+            subtitle="Kelola dan lacak transaksi makanan surplus kamu."
+          />
           <div className="mt-6">{children}</div>
         </main>
       </div>

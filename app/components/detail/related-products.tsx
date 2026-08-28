@@ -6,20 +6,16 @@ import { ArrowRight } from "lucide-react";
 import type { RelatedProduct } from "@/app/detail/product/data";
 import { formatIDR } from "@/app/detail/product/data";
 import { StaggerGroup, StaggerItem } from "./anim";
+import { PageHeader } from "@/app/components/page-header";
 
 export function RelatedProducts({ products }: { products: RelatedProduct[] }) {
   return (
     <section className="pt-20">
       <div className="flex items-end justify-between gap-4">
-        <div>
-          <h2 className="font-sans text-2xl font-bold tracking-tight text-green-700 sm:text-3xl">
-            Selamatkan Juga
-          </h2>
-          <p className="mt-2 max-w-md font-inter text-sm leading-relaxed text-charcoal-500">
-            Masih ada porsi lain yang menunggu diselamatkan hari ini — jangan
-            sampai terbuang.
-          </p>
-        </div>
+        <PageHeader
+          title="Selamatkan Juga"
+          subtitle="Masih ada porsi lain yang menunggu diselamatkan hari ini — jangan sampai terbuang."
+        />
         <Link
           href="/homePage"
           className="hidden items-center gap-1.5 font-inter text-sm font-semibold text-green-700 transition-colors hover:text-green-600 sm:inline-flex"

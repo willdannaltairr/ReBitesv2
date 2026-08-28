@@ -236,7 +236,7 @@ export function AddressFormView({
       { }
       <div className="mt-3 shrink-0 border-t border-sage-100 pt-3">
         {error && (
-          <p role="alert" className="mb-2.5 text-xs font-medium text-[#DC2626]">
+          <p role="alert" className="mb-2.5 text-xs font-medium text-red-600">
             {error}
           </p>
         )}

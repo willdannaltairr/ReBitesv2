@@ -17,6 +17,8 @@ import {
 import { cn } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/categories";
 import { fetchCategoryCounts } from "@/lib/catalog";
+import { PageHeader } from "@/app/components/page-header";
+import { SectionShell } from "@/app/components/section-shell";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50";
@@ -56,21 +58,17 @@ export function CategorySection() {
   }
 
   return (
-    <section
+    <SectionShell
       id="kategori"
-      data-nav="cream"
-      className="relative scroll-mt-24 bg-cream-50 py-16 lg:py-20"
+      dataNav="cream"
+      tone="cream"
+      className="scroll-mt-24"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="font-sans text-[22px] font-bold tracking-tight text-charcoal-900 sm:text-[28px]">
-              Jelajahi Kategori
-            </h2>
-            <p className="mt-1.5 max-w-md font-sans text-sm text-charcoal-500">
-              Temukan berbagai makanan sesuai seleramu yang masih layak dinikmati
-            </p>
-          </div>
+          <PageHeader
+            title="Jelajahi Kategori"
+            subtitle="Temukan berbagai makanan sesuai seleramu yang masih layak dinikmati"
+          />
           <Link
             href="/cari"
             className={cn(
@@ -133,7 +131,6 @@ export function CategorySection() {
             Lihat Semua <span aria-hidden>→</span>
           </Link>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

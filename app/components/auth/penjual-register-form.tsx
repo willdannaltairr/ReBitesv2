@@ -143,12 +143,12 @@ function FieldBox({
     <div>
       <label
         htmlFor={id}
-        className="mb-1.5 block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]"
+        className="mb-1.5 block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone"
       >
         {label}
       </label>
-      <div className="group flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-2 transition-colors duration-200 focus-within:border-[#225138] focus-within:bg-white focus-within:ring-1 focus-within:ring-[#225138]/15">
-        <Icon className="h-3.5 w-3.5 shrink-0 text-[#6B6A63]/55 transition-colors duration-200 group-focus-within:text-[#225138]" />
+      <div className="group flex items-center gap-2 rounded-lg border border-hairline bg-white px-3 py-2 transition-colors duration-200 focus-within:border-green-700 focus-within:bg-white focus-within:ring-1 focus-within:ring-green-700/15">
+        <Icon className="h-3.5 w-3.5 shrink-0 text-stone/55 transition-colors duration-200 group-focus-within:text-green-700" />
         {children}
         {trailing}
       </div>
@@ -169,7 +169,7 @@ function PasswordVisibilityButton({
       onClick={onToggle}
       aria-label={visible ? "Sembunyikan password" : "Tampilkan password"}
       aria-pressed={visible}
-      className="shrink-0 rounded-sm p-0.5 text-[#6B6A63]/55 transition-colors duration-200 hover:text-[#225138] focus-visible:text-[#225138] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#225138]/30"
+      className="shrink-0 rounded-sm p-0.5 text-stone/55 transition-colors duration-200 hover:text-green-700 focus-visible:text-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-700/30"
     >
       {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
     </button>
@@ -177,7 +177,7 @@ function PasswordVisibilityButton({
 }
 
 function inputClass(additional?: string) {
-  return `w-full bg-transparent py-1 font-sans text-[14px] leading-none text-[#1B3F2C] outline-none placeholder:text-[#9A9994] ${additional ?? ""}`;
+  return `w-full bg-transparent py-1 font-sans text-[14px] leading-none text-forest-800 outline-none placeholder:text-stone ${additional ?? ""}`;
 }
 
 function slugify(text: string): string {
@@ -393,7 +393,7 @@ export default function PenjualRegisterForm() {
   if (!sessionReady) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#225138] border-t-transparent" />
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-green-700 border-t-transparent" />
       </div>
     );
   }
@@ -403,7 +403,7 @@ export default function PenjualRegisterForm() {
       <motion.div variants={itemVariants} className="mb-3 flex-shrink-0">
         <Link
           href="/home"
-          className="group inline-flex items-center gap-1.5 rounded-full py-1 pr-2 font-sans text-[13px] font-medium text-[#6B6A63] transition-colors duration-200 hover:text-[#225138]"
+          className="group inline-flex items-center gap-1.5 rounded-full py-1 pr-2 font-sans text-[13px] font-medium text-stone transition-colors duration-200 hover:text-green-700"
         >
           <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
           Kembali
@@ -414,10 +414,10 @@ export default function PenjualRegisterForm() {
         variants={itemVariants}
         className="mb-5 flex items-center justify-center gap-2 lg:hidden flex-shrink-0"
       >
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#225138] text-[#F7F5EF]">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-green-700 text-cream">
           <Store className="h-[15px] w-[15px]" strokeWidth={1.75} />
         </span>
-        <span className="font-display text-lg font-semibold tracking-tight text-[#225138]">
+        <span className="font-display text-lg font-semibold tracking-tight text-green-700">
           ReBites
         </span>
       </motion.div>
@@ -428,49 +428,49 @@ export default function PenjualRegisterForm() {
           <div
             className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold transition-colors ${
               step >= 1
-                ? "bg-[#225138] text-white shadow-sm"
-                : "bg-[#EDE9DE] text-[#6B6A63]"
+                ? "bg-green-700 text-white shadow-sm"
+                : "bg-cream-200 text-stone"
             }`}
           >
             {step > 1 ? <CheckCircle2 className="h-3.5 w-3.5" /> : "1"}
           </div>
           <div
             className={`h-px flex-1 transition-colors ${
-              step >= 2 ? "bg-[#225138]" : "bg-[#E5E7EB]"
+              step >= 2 ? "bg-green-700" : "bg-hairline"
             }`}
           />
           <div
             className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold transition-colors ${
               step >= 2
-                ? "bg-[#225138] text-white shadow-sm"
-                : "bg-[#EDE9DE] text-[#6B6A63]"
+                ? "bg-green-700 text-white shadow-sm"
+                : "bg-cream-200 text-stone"
             }`}
           >
             2
           </div>
         </div>
         <div className="mt-2 flex justify-between">
-          <span className={`font-sans text-[10px] font-semibold uppercase tracking-widest ${step===1 ? "text-[#225138]" : "text-[#9A9994]"}`}>Akun</span>
-          <span className={`font-sans text-[10px] font-semibold uppercase tracking-widest ${step===2 ? "text-[#225138]" : "text-[#9A9994]"}`}>Usaha</span>
+          <span className={`font-sans text-[10px] font-semibold uppercase tracking-widest ${step===1 ? "text-green-700" : "text-stone"}`}>Akun</span>
+          <span className={`font-sans text-[10px] font-semibold uppercase tracking-widest ${step===2 ? "text-green-700" : "text-stone"}`}>Usaha</span>
         </div>
       </motion.div>
 
       <motion.h1
         variants={itemVariants}
-        className="font-display text-[22px] font-bold leading-[1.1] tracking-[-0.02em] text-[#14261E] flex-shrink-0"
+        className="font-display text-[22px] font-bold leading-[1.1] tracking-[-0.02em] text-charcoal-900 flex-shrink-0"
       >
         {step === 1 ? "Buat Akun Penjual" : "Data Usaha"}
       </motion.h1>
       <motion.p
         variants={itemVariants}
-        className="mt-1.5 font-sans text-[13px] leading-relaxed text-[#6B6A63] flex-shrink-0"
+        className="mt-1.5 font-sans text-[13px] leading-relaxed text-stone flex-shrink-0"
       >
         {step === 1
           ? "Verifikasi akun Anda untuk melanjutkan. Email & nama sudah sesuai sesi login."
           : "Ceritakan tentang usaha kuliner Anda untuk tampil di ReBites."}
       </motion.p>
 
-      <div className="mt-4 flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1.5 -mr-1.5 pb-1 [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#E5E7EB] [&::-webkit-scrollbar-track]:bg-transparent">
+      <div className="mt-4 flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1.5 -mr-1.5 pb-1 [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-hairline [&::-webkit-scrollbar-track]:bg-transparent">
         <AnimatePresence mode="wait" custom={direction}>
           {step === 1 && (
             <motion.div
@@ -606,7 +606,7 @@ export default function PenjualRegisterForm() {
 
                   <button
                     type="submit"
-                    className="mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-[#143B2D] px-4 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition-colors duration-200 hover:bg-[#0F2E24] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#225138]"
+                    className="mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-forest-dark px-4 py-3 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition-colors duration-200 hover:bg-forest-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
                   >
                     Selanjutnya
                   </button>
@@ -670,15 +670,15 @@ export default function PenjualRegisterForm() {
                         <FormItem>
                           <div>
                             <div className="mb-1.5 flex items-baseline justify-between gap-3">
-                              <label className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]">
+                              <label className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone">
                                 Kategori Jualan
                               </label>
-                              <span className="font-sans text-[10px] text-[#9A9994]">
+                              <span className="font-sans text-[10px] text-stone">
                                 Bisa lebih dari satu
                               </span>
                             </div>
-                            <div className="flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-2 transition-colors duration-200 focus-within:border-[#225138] focus-within:ring-1 focus-within:ring-[#225138]/15">
-                              <Tag className="h-3.5 w-3.5 shrink-0 text-[#6B6A63]/55" />
+                            <div className="flex items-center gap-2 rounded-lg border border-hairline bg-white px-3 py-2 transition-colors duration-200 focus-within:border-green-700 focus-within:ring-1 focus-within:ring-green-700/15">
+                              <Tag className="h-3.5 w-3.5 shrink-0 text-stone/55" />
                               <Popover>
                                 <PopoverTrigger asChild>
                                   <button
@@ -687,8 +687,8 @@ export default function PenjualRegisterForm() {
                                     className={cn(
                                       "flex w-full items-center justify-between gap-2 bg-transparent text-left font-sans text-[14px] outline-none",
                                       selected.length > 0
-                                        ? "text-[#1B3F2C]"
-                                        : "text-[#9A9994]",
+                                        ? "text-forest-800"
+                                        : "text-stone",
                                     )}
                                   >
                                     <span className="truncate">
@@ -701,7 +701,7 @@ export default function PenjualRegisterForm() {
                                 </PopoverTrigger>
                                 <PopoverContent
                                   align="start"
-                                  className="w-72 rounded-xl border-[#E5E7EB] p-2"
+                                  className="w-72 rounded-xl border-hairline p-2"
                                 >
                                   <div className="space-y-0.5">
                                     {KATEGORI_KULINER.map((k) => {
@@ -709,16 +709,16 @@ export default function PenjualRegisterForm() {
                                       return (
                                         <label
                                           key={k}
-                                          className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 transition-colors hover:bg-[#F7F5EF]"
+                                          className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 transition-colors hover:bg-cream"
                                         >
                                           <Checkbox
                                             checked={checked}
                                             onCheckedChange={() =>
                                               toggleCategory(k)
                                             }
-                                            className="data-[state=checked]:border-[#225138] data-[state=checked]:bg-[#225138]"
+                                            className="data-[state=checked]:border-green-700 data-[state=checked]:bg-green-700"
                                           />
-                                          <span className="font-sans text-sm text-[#1B3F2C]">
+                                          <span className="font-sans text-sm text-forest-800">
                                             {k}
                                           </span>
                                         </label>
@@ -741,16 +741,16 @@ export default function PenjualRegisterForm() {
                     render={({ field }) => (
                       <FormItem>
                         <div>
-                          <label className="mb-1.5 block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]">
+                          <label className="mb-1.5 block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone">
                             Kecamatan (Depok)
                           </label>
-                          <div className="flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-1.5 transition-colors duration-200 focus-within:border-[#225138] focus-within:ring-1 focus-within:ring-[#225138]/15">
-                            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#6B6A63]/55" />
+                          <div className="flex items-center gap-2 rounded-lg border border-hairline bg-white px-3 py-1.5 transition-colors duration-200 focus-within:border-green-700 focus-within:ring-1 focus-within:ring-green-700/15">
+                            <MapPin className="h-3.5 w-3.5 shrink-0 text-stone/55" />
                             <Select
                               onValueChange={field.onChange}
                               value={field.value}
                             >
-                              <SelectTrigger className="w-full border-0 bg-transparent p-0 font-sans text-[14px] text-[#1B3F2C] shadow-none focus:ring-0 focus:ring-offset-0 h-auto py-1 [&>span]:text-left">
+                              <SelectTrigger className="w-full border-0 bg-transparent p-0 font-sans text-[14px] text-forest-800 shadow-none focus:ring-0 focus:ring-offset-0 h-auto py-1 [&>span]:text-left">
                                 <SelectValue placeholder="Pilih kecamatan di Depok" />
                               </SelectTrigger>
                               <SelectContent>
@@ -799,21 +799,21 @@ export default function PenjualRegisterForm() {
                           <div className="mb-1.5 flex items-baseline justify-between gap-3">
                             <label
                               htmlFor="description"
-                              className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]"
+                              className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone"
                             >
                               Deskripsi Usaha
                             </label>
-                            <span className="font-sans text-[10px] text-[#9A9994]">
+                            <span className="font-sans text-[10px] text-stone">
                               Opsional
                             </span>
                           </div>
-                          <div className="group flex items-start gap-2 rounded-lg border border-[#E5E7EB] bg-white px-3 py-2 transition-colors duration-200 focus-within:border-[#225138] focus-within:ring-1 focus-within:ring-[#225138]/15">
-                            <Store className="mt-2 h-3.5 w-3.5 shrink-0 text-[#6B6A63]/55 transition-colors duration-200 group-focus-within:text-[#225138]" />
+                          <div className="group flex items-start gap-2 rounded-lg border border-hairline bg-white px-3 py-2 transition-colors duration-200 focus-within:border-green-700 focus-within:ring-1 focus-within:ring-green-700/15">
+                            <Store className="mt-2 h-3.5 w-3.5 shrink-0 text-stone/55 transition-colors duration-200 group-focus-within:text-green-700" />
                             <Textarea
                               id="description"
                               placeholder="Ceritakan tentang usaha Anda..."
                               rows={2}
-                              className="min-h-[56px] resize-none border-0 bg-transparent p-0 py-1 font-sans text-[14px] leading-relaxed text-[#1B3F2C] shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#9A9994]"
+                              className="min-h-[56px] resize-none border-0 bg-transparent p-0 py-1 font-sans text-[14px] leading-relaxed text-forest-800 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-stone"
                               {...field}
                             />
                           </div>
@@ -825,15 +825,15 @@ export default function PenjualRegisterForm() {
 
                   <div>
                     <div className="mb-1.5 flex items-baseline justify-between gap-3">
-                      <label className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6B6A63]">
+                      <label className="block font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-stone">
                         Gambar Toko
                       </label>
-                      <span className="font-sans text-[10px] text-[#9A9994]">
+                      <span className="font-sans text-[10px] text-stone">
                         Opsional
                       </span>
                     </div>
-                    <div className="flex items-center gap-3 rounded-lg border border-dashed border-[#E5E7EB] bg-[#FCFCF9] px-3 py-2.5">
-                      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[#E5E7EB] bg-white">
+                    <div className="flex items-center gap-3 rounded-lg border border-dashed border-hairline bg-cream-50 px-3 py-2.5">
+                      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-hairline bg-white">
                         {logoPreview ? (
                           <Image
                             src={logoPreview}
@@ -843,18 +843,18 @@ export default function PenjualRegisterForm() {
                             unoptimized
                           />
                         ) : (
-                          <ImageIcon className="h-5 w-5 text-[#9A9994]" />
+                          <ImageIcon className="h-5 w-5 text-stone" />
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
                         <button
                           type="button"
                           onClick={() => logoInputRef.current?.click()}
-                          className="rounded-md border border-[#E5E7EB] bg-white px-3 py-1.5 font-sans text-[11px] font-medium text-[#225138] shadow-sm transition-colors hover:bg-[#F7F5EF]"
+                          className="rounded-md border border-hairline bg-white px-3 py-1.5 font-sans text-[11px] font-medium text-green-700 shadow-sm transition-colors hover:bg-cream"
                         >
                           {logoFile ? "Ganti Logo" : "Pilih Logo"}
                         </button>
-                        <p className="mt-1 font-sans text-[10px] text-[#9A9994]">
+                        <p className="mt-1 font-sans text-[10px] text-stone">
                           PNG/JPG, maks 2MB
                         </p>
                       </div>
@@ -881,7 +881,7 @@ export default function PenjualRegisterForm() {
                     <button
                       type="button"
                       onClick={goBack}
-                      className="flex items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6B6A63] shadow-sm transition-colors duration-200 hover:bg-[#F7F5EF]"
+                      className="flex items-center justify-center gap-1.5 rounded-lg border border-hairline bg-white px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-stone shadow-sm transition-colors duration-200 hover:bg-cream"
                     >
                       <ArrowLeft className="h-3.5 w-3.5" />
                       Kembali
@@ -889,7 +889,7 @@ export default function PenjualRegisterForm() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#143B2D] px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition-colors duration-200 hover:bg-[#0F2E24] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#225138] disabled:cursor-not-allowed disabled:opacity-70"
+                      className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-forest-dark px-4 py-3 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition-colors duration-200 hover:bg-forest-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                       {loading ? "Mendaftar..." : "Buat Akun"}
                       {!loading && <ArrowRight className="h-3.5 w-3.5" />}
@@ -904,12 +904,12 @@ export default function PenjualRegisterForm() {
 
       <motion.p
         variants={itemVariants}
-        className="mt-6 text-center font-sans text-[13px] text-[#6B6A63] flex-shrink-0"
+        className="mt-6 text-center font-sans text-[13px] text-stone flex-shrink-0"
       >
         Sudah punya toko?{" "}
         <Link
           href="/auth/login/penjual"
-          className="font-semibold text-[#225138] underline underline-offset-4 transition-colors hover:text-[#1B3F2C]"
+          className="font-semibold text-green-700 underline underline-offset-4 transition-colors hover:text-forest-800"
         >
           Masuk sebagai penjual
         </Link>

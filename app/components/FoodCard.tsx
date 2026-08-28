@@ -38,7 +38,7 @@ export function FoodCard({ item, onViewDetail }: { item: FoodItem; onViewDetail?
         />
         {/* Badge - top left - reference style */}
         {item.discountPercent > 0 && (
-          <div className="absolute left-3 top-3 z-20 rounded-full bg-[#E53935] px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-md">
+          <div className="absolute left-3 top-3 z-20 rounded-full bg-sale px-2.5 py-1 text-[11px] font-bold leading-none text-white shadow-md">
             Hemat {item.discountPercent}%
           </div>
         )}
@@ -52,12 +52,12 @@ export function FoodCard({ item, onViewDetail }: { item: FoodItem; onViewDetail?
             toggle(item.id);
           }}
           className={cn(
-            "absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-[#E53935]",
-            liked && "bg-white text-[#E53935]",
+            "absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-zinc-500 shadow-md backdrop-blur-sm transition-colors hover:bg-white hover:text-sale",
+            liked && "bg-white text-sale",
             FOCUS_RING,
           )}
         >
-          <Heart className={cn("h-4 w-4", liked && "fill-[#E53935] text-[#E53935]")} />
+          <Heart className={cn("h-4 w-4", liked && "fill-sale text-sale")} />
         </button>
       </div>
 

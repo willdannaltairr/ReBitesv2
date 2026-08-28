@@ -7,7 +7,8 @@ import { cn } from "@/lib/utils";
 import { useCatalog } from "@/lib/catalog";
 import { FoodCard } from "@/app/components/FoodCard";
 import { SearchFilterBar } from "@/app/components/SearchFilterBar";
-import { SoftBlob } from "@/app/components/ornaments";
+import { PageHeader } from "@/app/components/page-header";
+import { SectionShell } from "@/app/components/section-shell";
 import type { FilterKey } from "@/lib/types";
 
 const FOCUS_RING =
@@ -72,13 +73,12 @@ export function UrgentDealsSection({
   );
 
   return (
-    <section
+    <SectionShell
       id="rekomendasi"
-      data-nav="green"
-      className="grain-overlay relative flex min-h-screen scroll-mt-24 flex-col justify-center overflow-hidden bg-primary py-16 lg:py-20"
+      dataNav="green"
+      tone="green"
+      className="flex min-h-screen scroll-mt-24 flex-col justify-center"
     >
-      <SoftBlob className="-left-24 top-1/4 h-80 w-80 bg-white/10" />
-      <SoftBlob className="-right-24 bottom-0 h-96 w-96 bg-gold-500/15" />
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-white/[0.06] blur-3xl" />
 
       {SPARKLES.map((pos, i) => (
@@ -103,26 +103,24 @@ export function UrgentDealsSection({
         </motion.span>
       ))}
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <div className="flex items-center gap-2">
+          <PageHeader
+            dark
+            icon={
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E53935]" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#E53935]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sale" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-sale" />
               </span>
-              <span className="font-sans text-xs font-bold uppercase tracking-[0.3em] text-white/90">
-                Rekomendasi Untukmu
-              </span>
-            </div>
-
-            <h2 className="mt-3 font-sans text-[22px] font-bold tracking-tight text-white sm:text-[28px]">
-              Menu <span className="text-caramel">unggulan</span> hari ini
-            </h2>
-            <p className="mt-2 max-w-xl font-sans text-sm text-white/70">
-              Pilihan makanan surplus dengan rating terbaik dari UMKM terdekat — diperbarui setiap hari.
-            </p>
-          </div>
+            }
+            eyebrow="Rekomendasi Untukmu"
+            title={
+              <>
+                Menu <span className="text-caramel">unggulan</span> hari ini
+              </>
+            }
+            subtitle="Pilihan makanan surplus dengan rating terbaik dari UMKM terdekat — diperbarui setiap hari."
+          />
           <a
             href="/cari"
             className={cn(
@@ -230,6 +228,6 @@ export function UrgentDealsSection({
           </a>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }
