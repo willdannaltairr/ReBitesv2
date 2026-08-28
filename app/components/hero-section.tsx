@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useState, useId } from "react";
@@ -7,6 +7,7 @@ import { ArrowRight, Star, User, Menu, X, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import FoldText from "@/app/components/FoldText";
+import RotatingText from "@/app/components/RotatingText";
 import { DashedDivider } from "@/app/components/ornaments";
 
 const NAV_LINKS = [
@@ -290,28 +291,44 @@ export function HeroSection() {
               {t("Khusus Wilayah Kota Depok", "Only in Depok City")}
             </span>
 
-            <div className="mt-8 w-full">
+            <div className="mt-8 flex w-full flex-col items-center">
               <FoldText
-                text="Ubah cara kamu menyelamatkan makanan."
+                text="Ubah cara kamu menyelamatkan"
                 hinge="top"
                 trigger="load"
                 duration={1.15}
                 stagger={0.03}
                 ease="expo.out"
                 perspective={600}
-                creaseShading={0.45}
+                creaseShading={0}
                 as="h1"
-                fontSize="clamp(2.5rem, 6.5vw, 5.5rem)"
-                fontWeight={600}
+                fontSize="clamp(2rem, 4.5vw, 3.5rem)"
+                fontWeight={300}
                 lineHeight={1.05}
                 letterSpacing="-0.02em"
                 className="text-forest-dark"
+                style={{ fontStyle: "italic" }}
               />
+              <div className="flex w-full items-baseline justify-center">
+                <RotatingText
+                  texts={["makanan.", "UMKM.", "masyarakat.", "lingkungan."]}
+                  mainClassName="font-display font-light italic text-caramel"
+                  style={{
+                    fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
+                    lineHeight: 1.05,
+                    letterSpacing: "-0.01em",
+                  }}
+                  rotationInterval={2200}
+                  staggerDuration={0.03}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  exit={{ y: "-120%", opacity: 0 }}
+                />
+              </div>
             </div>
 
             <p className="mt-8 max-w-2xl font-sans text-base leading-[1.85] text-muted-foreground sm:text-lg">
               ReBites menghubungkan kamu dengan makanan surplus berkualitas dari
-              dapur UMKM Kota Depok — harga lebih hemat, kualitas tetap juara,
+              dapur UMKM Kota Depok â€” harga lebih hemat, kualitas tetap juara,
               dan tanpa food waste.
             </p>
 
@@ -688,34 +705,34 @@ function HeroOrganicArt() {
 function HeroFoodBackdrop() {
   const shots = [
     {
-      src: "/makanan2.jpeg",
+      src: "/bunga37325396.jpg",
       className:
-        "-left-14 -top-14 h-64 w-64 rotate-[-14deg] rounded-[2.75rem] opacity-30 blur-xl sm:-left-20 sm:h-80 sm:w-80",
+        "-left-14 -top-14 h-64 w-64 rotate-[-14deg] rounded-[2.75rem] opacity-30 blur-lg sm:-left-20 sm:h-80 sm:w-80",
     },
     {
-      src: "/makanan5.jpeg",
+      src: "/bunga36865667.jpg",
       className:
-        "-left-10 bottom-24 hidden h-56 w-56 rotate-[10deg] rounded-full opacity-25 blur-2xl sm:block sm:h-64 sm:w-64 lg:-left-6",
+        "-left-10 bottom-24 hidden h-56 w-56 rotate-[10deg] rounded-full opacity-25 blur-xl sm:block sm:h-64 sm:w-64 lg:-left-6",
     },
     {
-      src: "/makanan3.jpeg",
+      src: "/bunga18372229.jpg",
       className:
-        "-right-16 top-4 h-72 w-72 rotate-[12deg] rounded-[2.75rem] opacity-30 blur-xl sm:-right-24 sm:h-96 sm:w-96",
+        "-right-16 top-4 h-72 w-72 rotate-[12deg] rounded-[2.75rem] opacity-30 blur-lg sm:-right-24 sm:h-96 sm:w-96",
     },
     {
-      src: "/makanan7.jpg",
+      src: "/bunga34190668.jpg",
       className:
-        "bottom-6 right-24 hidden h-60 w-60 -rotate-[8deg] rounded-full opacity-25 blur-2xl sm:block lg:right-40",
+        "bottom-6 right-24 hidden h-60 w-60 -rotate-[8deg] rounded-full opacity-25 blur-xl sm:block lg:right-40",
     },
     {
-      src: "/makanan6.jpeg",
+      src: "/bunga27010565.jpg",
       className:
-        "left-[11%] top-8 hidden h-36 w-36 rotate-6 rounded-full opacity-20 blur-2xl sm:block",
+        "left-[11%] top-8 hidden h-36 w-36 rotate-6 rounded-full opacity-20 blur-xl sm:block",
     },
     {
-      src: "/makanan10.webp",
+      src: "/bunga38042961.jpg",
       className:
-        "right-[13%] top-10 hidden h-40 w-40 -rotate-6 rounded-full opacity-20 blur-2xl lg:block",
+        "right-[13%] top-10 hidden h-40 w-40 -rotate-6 rounded-full opacity-20 blur-xl lg:block",
     },
   ];
 
@@ -724,11 +741,9 @@ function HeroFoodBackdrop() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <HeroOrganicArt />
-
-      {shots.map((shot) => (
+      {shots.map((shot, i) => (
         <div
-          key={shot.src}
+          key={`${shot.src}-${i}`}
           className={`absolute overflow-hidden ${shot.className}`}
         >
           <Image
