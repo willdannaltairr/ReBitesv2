@@ -8,7 +8,7 @@ import { ArrowUp, Mail, MapPin } from 'lucide-react';
 const SAGE = '#8C9A8A';
 const CREAM = '#F8F3E7';
 const CREAM_BG = '#F7F5EF';
-const FOREST = '#17301F';
+const FOREST = '#235339';
 const GOLD = '#C9A24B';
 
 function InstagramIcon({ className }: { className?: string }) {

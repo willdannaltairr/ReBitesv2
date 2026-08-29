@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { ArrowRight, Scale, Store, Users, Wallet, Star, Quote } from "lucide-react";
+import { ArrowRight, Scale, Users, Wallet, Star, Quote } from "lucide-react";
 import { SmoothScroll } from "@/app/components/smooth-scroll";
 import { Preloader } from "@/app/components/preloader";
 import { SiteFooter } from "@/app/components/site-footer";
@@ -102,6 +102,17 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
+const FALLBACK_STORES = [
+  "Dapur Ibu Sri",
+  "Kue Mbok Darmi",
+  "Warung Mang Teten",
+  "Soto Mie Bogor",
+  "Kopi Nusantara",
+  "Bakso Pak Joko",
+  "Ayam Geprek Sambal",
+  "Es Teh Segar",
+];
+
 const IMPACT_STATS = [
   {
     icon: Scale,
@@ -192,31 +203,41 @@ export default function Home() {
   return (
     <SmoothScroll>
       <Preloader onDone={() => setLoaded(true)} />
-      <div id="top">
-        <HeroSection />
+      <div className="flex min-h-screen flex-col">
+        <div id="top" className="flex flex-1 flex-col">
+          <HeroSection />
+        </div>
+
+        {(() => {
+          const stores = partners.length > 0 ? partners : FALLBACK_STORES;
+          return (
+            <section
+              data-nav="cream"
+              aria-label="Mitra ReBites"
+              className="border-y border-hairline bg-cream py-5 lg:py-6"
+            >
+              <div className="[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+                <Marquee pauseOnHover>
+                  {stores.map((p, i) => (
+                    <span
+                      key={i}
+                      className="mx-6 flex items-center font-display text-lg font-light tracking-tight text-forest-dark/45 lg:text-xl"
+                    >
+                      {p}
+                      <span
+                        aria-hidden
+                        className="ml-6 h-1 w-1 rounded-full bg-caramel/70"
+                      />
+                    </span>
+                  ))}
+                </Marquee>
+              </div>
+            </section>
+          );
+        })()}
       </div>
 
       <HeroFoodCarousel />
-
-      {partners.length > 0 && (
-        <section
-          data-nav="cream"
-          aria-label="Mitra ReBites"
-          className="border-y border-border bg-cream-50 py-7"
-        >
-          <Marquee reverse pauseOnHover>
-            {partners.map((p, i) => (
-              <span
-                key={i}
-                className="mx-8 flex items-center gap-3 font-display text-lg font-medium tracking-tight text-forest-dark/60 lg:text-xl"
-              >
-                <Store className="h-4 w-4 text-caramel" />
-                {p}
-              </span>
-            ))}
-          </Marquee>
-        </section>
-      )}
 
       <UrgentDealsSection onViewDetail={handleViewDetail} />
 
