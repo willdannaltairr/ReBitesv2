@@ -154,7 +154,7 @@ export function HeroFoodCarousel() {
                 <h3 className="truncate font-display text-lg font-semibold tracking-tight text-forest-dark sm:text-xl">
                   {selected.name}
                 </h3>
-                <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-wider text-green-700">
+                <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-cream-100 px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-wider text-forest-dark">
                   <Flame className="h-3 w-3" />
                   Hemat {formatRupiah(selected.originalPrice - selected.price)}
                 </span>
@@ -172,7 +172,7 @@ export function HeroFoodCarousel() {
               </div>
 
               <div className="mt-3 flex flex-wrap items-center gap-3">
-                <span className="font-display text-xl font-bold text-green-700">
+                <span className="font-display text-xl font-bold text-forest-dark">
                   {formatRupiah(selected.price)}
                 </span>
                 <span className="font-sans text-sm text-stone line-through">

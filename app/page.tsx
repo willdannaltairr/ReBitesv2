@@ -239,7 +239,7 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
             <div>
               <Reveal delay={0.15}>
-                <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.02] tracking-[-0.02em] text-primary">
+                <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.02] tracking-[-0.02em] text-forest-dark">
                   <RevealWords text="Bukan sekadar" />{" "}
                   <RevealWords text="menyelamatkan" />{" "}
                   <RevealWords text="makanan." />
@@ -278,7 +278,7 @@ export default function Home() {
                   <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-5 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-6">
                     <stat.icon className="mb-3 h-5 w-5 text-caramel" />
 
-                    <p className="flex items-baseline gap-1 whitespace-nowrap font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-none tracking-tight text-primary">
+                    <p className="flex items-baseline gap-1 whitespace-nowrap font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-none tracking-tight text-forest-dark">
                       <Counter
                         to={stat.value}
                         prefix={stat.prefix}
@@ -302,7 +302,7 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.1}>
-            <h3 className="mt-14 font-display text-[clamp(1.5rem,2.8vw,2.2rem)] font-light leading-[1.1] tracking-[-0.02em] text-primary lg:mt-20">
+            <h3 className="mt-14 font-display text-[clamp(1.5rem,2.8vw,2.2rem)] font-light leading-[1.1] tracking-[-0.02em] text-forest-dark lg:mt-20">
               Untuk <span className="text-caramel">UMKM</span>. Untuk{" "}
               <span className="text-caramel">masyarakat</span>. Untuk{" "}
               <span className="text-caramel">lingkungan</span>.
@@ -333,7 +333,7 @@ export default function Home() {
                     {item.num}
                   </span>
 
-                  <h3 className="mt-5 font-sans text-xl font-semibold tracking-tight text-primary">
+                  <h3 className="mt-5 font-sans text-xl font-semibold tracking-tight text-forest-dark">
                     {item.title}
                   </h3>
 

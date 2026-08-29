@@ -4,7 +4,12 @@ import Image from "next/image";
 import { useEffect, useState, useId } from "react";
 import Link from "next/link";
 import { ArrowRight, Star, User, Menu, X, MapPin } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { cn } from "@/lib/utils";
 import FoldText from "@/app/components/FoldText";
 import RotatingText from "@/app/components/RotatingText";
@@ -702,37 +707,144 @@ function HeroOrganicArt() {
   );
 }
 
+type LeafProps = {
+  src: string;
+  size: number;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  rotate: number;
+  opacity: number;
+  blur?: number;
+  speedY: number;
+  speedX: number;
+  radius: string;
+};
+
+function Leaf({
+  src,
+  size,
+  top,
+  left,
+  right,
+  bottom,
+  rotate,
+  opacity,
+  blur,
+  speedY,
+  speedX,
+  radius,
+}: LeafProps) {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, (v) => v * speedY);
+  const x = useTransform(scrollY, (v) => v * speedX);
+
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none z-0 overflow-hidden"
+      style={{
+        position: "absolute",
+        top,
+        left,
+        right,
+        bottom,
+        width: size,
+        height: size,
+        y,
+        x,
+        rotate,
+        opacity,
+        filter: `${blur ? `blur(${blur}px) ` : ""}saturate(1.12) brightness(1.04)`,
+        borderRadius: radius,
+      }}
+    >
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(max-width: 640px) 256px, 384px"
+        fetchPriority="low"
+        className="object-cover"
+      />
+    </motion.div>
+  );
+}
+
 function HeroFoodBackdrop() {
-  const shots = [
+  const leaves = [
     {
       src: "/daun3668371.jpg",
-      className:
-        "-left-16 -top-16 h-64 w-64 rotate-[-12deg] rounded-[100%_0_100%_0] opacity-40 blur-sm sm:h-72 sm:w-72 lg:-left-20 lg:-top-20",
+      size: 320,
+      top: "-40px",
+      left: "-70px",
+      radius: "100% 0 100% 0",
+      rotate: -35,
+      opacity: 0.55,
+      blur: 0.5,
+      speedY: -0.12,
+      speedX: 0.04,
     },
     {
       src: "/daun797797.jpg",
-      className:
-        "-right-16 -top-16 hidden h-56 w-56 rotate-[12deg] rounded-[0_100%_0_100%] opacity-35 blur-sm sm:block sm:h-64 sm:w-64 lg:-right-20 lg:-top-20",
+      size: 288,
+      top: "-44px",
+      right: "-70px",
+      radius: "0 100% 0 100%",
+      rotate: 32,
+      opacity: 0.5,
+      blur: 0.5,
+      speedY: -0.18,
+      speedX: -0.04,
     },
     {
       src: "/daun1420019.jpg",
-      className:
-        "-left-12 bottom-10 h-56 w-56 rotate-[10deg] rounded-[0_100%_0_100%] opacity-40 blur-sm sm:h-64 sm:w-64 lg:-left-16 lg:h-72 lg:w-72",
+      size: 300,
+      bottom: "24px",
+      left: "-56px",
+      radius: "0 100% 0 100%",
+      rotate: 28,
+      opacity: 0.55,
+      blur: 0.4,
+      speedY: -0.24,
+      speedX: 0.06,
     },
     {
       src: "/daun1072179.jpg",
-      className:
-        "-right-12 bottom-10 hidden h-52 w-52 -rotate-[10deg] rounded-[100%_0_100%_0] opacity-35 blur-sm sm:block sm:h-60 sm:w-60 lg:-right-16 lg:h-72 lg:w-72",
+      size: 272,
+      bottom: "24px",
+      right: "-56px",
+      radius: "100% 0 100% 0",
+      rotate: -30,
+      opacity: 0.5,
+      blur: 0.4,
+      speedY: -0.2,
+      speedX: -0.05,
     },
     {
       src: "/daun1366957.jpg",
-      className:
-        "left-[4%] top-1/2 hidden h-40 w-40 -translate-y-1/2 rotate-6 rounded-[0_100%_0_100%] opacity-30 blur-sm lg:block lg:h-44 lg:w-44",
+      size: 208,
+      top: "46%",
+      left: "4%",
+      radius: "0 100% 0 100%",
+      rotate: 14,
+      opacity: 0.45,
+      blur: 0.3,
+      speedY: -0.32,
+      speedX: 0.09,
     },
     {
       src: "/daun3668371.jpg",
-      className:
-        "right-[4%] top-1/2 hidden h-40 w-40 -translate-y-1/2 -rotate-6 rounded-[100%_0_100%_0] opacity-30 blur-sm lg:block lg:h-44 lg:w-44",
+      size: 208,
+      top: "48%",
+      right: "4%",
+      radius: "100% 0 100% 0",
+      rotate: -16,
+      opacity: 0.45,
+      blur: 0.3,
+      speedY: -0.36,
+      speedX: -0.08,
     },
   ];
 
@@ -741,19 +853,8 @@ function HeroFoodBackdrop() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      {shots.map((shot, i) => (
-        <div
-          key={`${shot.src}-${i}`}
-          className={`absolute overflow-hidden ${shot.className}`}
-        >
-          <Image
-            src={shot.src}
-            alt=""
-            fill
-            sizes="(max-width: 640px) 256px, 384px"
-            className="object-cover"
-          />
-        </div>
+      {leaves.map((leaf, i) => (
+        <Leaf key={`${leaf.src}-${i}`} {...leaf} />
       ))}
 
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-cream to-transparent" />
