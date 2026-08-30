@@ -136,7 +136,7 @@ export function SiteFooter() {
     >
       <FooterWave />
 
-      <div className="mx-auto max-w-7xl px-4 pb-10 pt-40 sm:px-6 lg:px-8 lg:pt-44">
+      <div className="mx-auto max-w-7xl px-4 pb-10 pt-32 sm:px-6 lg:px-8 lg:pt-36">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr_1.4fr] lg:gap-8 lg:items-end">
           {/* Brand — widest column */}
           <div className="text-center sm:text-left">
@@ -199,6 +199,16 @@ export function SiteFooter() {
           {/* Legal */}
           <nav aria-label="Legal" className="text-center sm:text-left">
             <ul className="space-y-3.5">
+              <li>
+                <a
+                  href="mailto:halo@rebites.id"
+                  className="inline-flex items-center justify-center gap-2 font-sans text-[15px] transition-colors duration-300 hover:text-[#C9A24B] sm:justify-start"
+                  style={{ color: CREAM }}
+                >
+                  <Mail className="h-4 w-4 shrink-0 opacity-70" />
+                  halo@rebites.id
+                </a>
+              </li>
               {LEGAL_LINKS.map((link) => (
                 <li key={link.label}>
                   <Link
@@ -216,16 +226,6 @@ export function SiteFooter() {
           {/* Support */}
           <nav aria-label="Dukungan" className="text-center sm:text-left">
             <ul className="space-y-3.5">
-              <li>
-                <a
-                  href="mailto:halo@rebites.id"
-                  className="inline-flex items-center gap-2 font-sans text-[15px] transition-colors duration-300 hover:text-[#C9A24B]"
-                  style={{ color: CREAM }}
-                >
-                  <Mail className="h-4 w-4 shrink-0 opacity-70" />
-                  halo@rebites.id
-                </a>
-              </li>
               <li>
                 <span
                   className="inline-flex items-start gap-2 text-left font-sans text-[15px] leading-relaxed"

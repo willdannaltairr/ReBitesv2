@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { ArrowRight, Scale, Users, Wallet, Star, Quote } from "lucide-react";
+import { ArrowRight, Star, Quote } from "lucide-react";
 import { SmoothScroll } from "@/app/components/smooth-scroll";
 import { Preloader } from "@/app/components/preloader";
 import { SiteFooter } from "@/app/components/site-footer";
 import { Reveal, RevealWords } from "@/app/components/reveal";
-import { Counter } from "@/app/components/counter";
 import { Marquee } from "@/app/components/marquee";
 import HowItWorks from "@/app/components/HowItWorks";
 import { UrgentDealsSection } from "@/app/components/UrgentDealsSection";
+import { FlashSaleSection } from "@/app/components/FlashSaleSection";
 import { ProductDetailModal } from "@/app/components/ProductDetailModalLazy";
 import { useProductDetail } from "@/app/detail/product/use-product-detail";
 import { HeroSection } from "@/app/components/hero-section";
@@ -113,37 +113,11 @@ const FALLBACK_STORES = [
   "Es Teh Segar",
 ];
 
-const IMPACT_STATS = [
-  {
-    icon: Scale,
-    value: 184,
-    prefix: "",
-    suffix: " kg",
-    label: "rata-rata pangan terbuang",
-    subtext: "115–184 kg per kapita/tahun",
-  },
-  {
-    icon: Wallet,
-    value: 551,
-    prefix: "Rp ",
-    suffix: " T",
-    label: "kerugian ekonomi per tahun",
-    subtext: "Rp213–551 triliun",
-  },
-  {
-    icon: Users,
-    value: 125,
-    prefix: "",
-    suffix: " jt",
-    label: "orang berpotensi makan",
-    subtext: "61–125 juta orang",
-  },
-];
-
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const [testimonialApi, setTestimonialApi] = useState<CarouselApi>();
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const testimonialPaused = useRef(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
@@ -200,6 +174,19 @@ export default function Home() {
     };
   }, [testimonialApi]);
 
+  // Auto-play carousel testimoni setiap 5 detik, pause saat hover.
+  useEffect(() => {
+    if (!testimonialApi || !testimonialApi.canScrollNext()) return;
+
+    const interval = setInterval(() => {
+      if (!testimonialPaused.current) {
+        testimonialApi.scrollNext();
+      }
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, [testimonialApi]);
+
   return (
     <SmoothScroll>
       <Preloader onDone={() => setLoaded(true)} />
@@ -238,6 +225,8 @@ export default function Home() {
       </div>
 
       <HeroFoodCarousel />
+
+      <FlashSaleSection onViewDetail={handleViewDetail} />
 
       <UrgentDealsSection onViewDetail={handleViewDetail} />
 
@@ -293,77 +282,51 @@ export default function Home() {
               </Reveal>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3">
-              {IMPACT_STATS.map((stat, i) => (
-                <Reveal key={stat.label} delay={0.15 + i * 0.08}>
-                  <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-5 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-6">
-                    <stat.icon className="mb-3 h-5 w-5 text-caramel" />
-
-                    <p className="flex items-baseline gap-1 whitespace-nowrap font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-none tracking-tight text-forest-dark">
-                      <Counter
-                        to={stat.value}
-                        prefix={stat.prefix}
-                        suffix={stat.suffix}
-                        duration={8}
-                        className="whitespace-nowrap tabular-nums"
-                      />
-                    </p>
-
-                    <p className="mt-2 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                      {stat.label}
-                    </p>
-
-                    <p className="mt-1 font-sans text-xs text-muted-foreground">
-                      {stat.subtext}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          <Reveal delay={0.1}>
-            <h3 className="mt-14 font-display text-[clamp(1.5rem,2.8vw,2.2rem)] font-light leading-[1.1] tracking-[-0.02em] text-forest-dark lg:mt-20">
-              Untuk <span className="text-caramel">UMKM</span>. Untuk{" "}
-              <span className="text-caramel">masyarakat</span>. Untuk{" "}
-              <span className="text-caramel">lingkungan</span>.
-            </h3>
-          </Reveal>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:mt-10">
-            {[
-              {
-                num: "01",
-                title: "UMKM",
-                desc: "Memberi peluang tambahan pendapatan dari makanan surplus yang masih layak konsumsi.",
-              },
-              {
-                num: "02",
-                title: "Masyarakat",
-                desc: "Memudahkan menemukan makanan berkualitas dengan harga yang lebih terjangkau.",
-              },
-              {
-                num: "03",
-                title: "Lingkungan",
-                desc: "Membantu mengurangi potensi food waste dengan memperpanjang pemanfaatan makanan.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.num} delay={0.1 + i * 0.08}>
-                <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-7 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-8">
-                  <span className="font-sans text-sm italic tracking-[0.2em] text-caramel">
-                    {item.num}
-                  </span>
-
-                  <h3 className="mt-5 font-sans text-xl font-semibold tracking-tight text-forest-dark">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 max-w-xs font-sans text-sm leading-[1.8] text-muted-foreground">
-                    {item.desc}
-                  </p>
-                </div>
+            <div className="flex flex-col gap-6">
+              <Reveal delay={0.15}>
+                <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-light leading-[1.1] tracking-[-0.02em] text-forest-dark">
+                  Untuk <span className="text-caramel">UMKM</span>. Untuk{" "}
+                  <span className="text-caramel">masyarakat</span>. Untuk{" "}
+                  <span className="text-caramel">lingkungan</span>.
+                </h3>
               </Reveal>
-            ))}
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                {[
+                  {
+                    num: "01",
+                    title: "UMKM",
+                    desc: "Memberi peluang tambahan pendapatan dari makanan surplus yang masih layak konsumsi.",
+                  },
+                  {
+                    num: "02",
+                    title: "Masyarakat",
+                    desc: "Memudahkan menemukan makanan berkualitas dengan harga yang lebih terjangkau.",
+                  },
+                  {
+                    num: "03",
+                    title: "Lingkungan",
+                    desc: "Membantu mengurangi potensi food waste dengan memperpanjang pemanfaatan makanan.",
+                  },
+                ].map((item, i) => (
+                  <Reveal key={item.num} delay={0.2 + i * 0.08}>
+                    <div className="group flex h-full cursor-pointer flex-col rounded-[var(--radius)] border border-border bg-white p-6 shadow-[0_10px_30px_-24px_rgba(27,77,50,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-caramel sm:p-7">
+                      <span className="font-sans text-sm italic tracking-[0.2em] text-caramel">
+                        {item.num}
+                      </span>
+
+                      <h3 className="mt-4 font-sans text-xl font-semibold tracking-tight text-forest-dark">
+                        {item.title}
+                      </h3>
+
+                      <p className="mt-3 font-sans text-sm leading-[1.8] text-muted-foreground">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -400,7 +363,15 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="relative mt-12 lg:mt-16">
+            <div
+              className="relative mt-12 lg:mt-16"
+              onMouseEnter={() => {
+                testimonialPaused.current = true;
+              }}
+              onMouseLeave={() => {
+                testimonialPaused.current = false;
+              }}
+            >
               <button
                 type="button"
                 onClick={() => testimonialApi?.scrollPrev()}

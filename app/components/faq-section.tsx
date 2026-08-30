@@ -67,7 +67,7 @@ export function FaqSection() {
       data-nav="cream"
       className="grain-overlay relative overflow-hidden bg-cream"
     >
-      <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-8 lg:px-12 lg:pb-12 lg:pt-28">
         {/* Section label & heading */}
         <div className="mx-auto max-w-2xl text-center">
           <Reveal delay={0.05}>
